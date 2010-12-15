@@ -1,8 +1,0 @@
-out_to_x			no
-out_to_console	yes
-update_interval	10.0
-total_run_times	0
-if_up_strictness	address
-
-TEXT
-[^fg(\#1793D0)${time %A, %B %d %H:%M}^fg()]
