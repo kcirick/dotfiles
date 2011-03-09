@@ -1,80 +1,37 @@
 #!/bin/sh
 #
 # ~/.xinitrc
-# Executed by startx (run your window manager from here)
 
-
-xset +fp /usr/share/fonts/misc &
-
-#feh --bg-scale ~/Wallpapers/zebra.jpg &
-#feh --bg-scale ~/Wallpapers/Kelly_Rick-31_Small.jpg &
-feh --bg-center ~/Wallpapers/christmas.jpg &
-
-xsetroot -cursor_name left_ptr
-
-# Initialize Variables for getcpu() function
-PREV_TOTAL=0
-PREV_IDLE=0
-
-getcpu(){
-	CPU=(`cat /proc/stat | grep '^cpu '`) # Get the total CPU statistics.
-	unset CPU[0]                          # Discard the "cpu" prefix.
-	IDLE=${CPU[4]}                        # Get the idle CPU time.
-
-	# Calculate the total CPU time.
-	TOTAL=0
-	for VALUE in "${CPU[@]}"; do
-		let "TOTAL=$TOTAL+$VALUE"
-	done
-
-	# Calculate the CPU usage since we last checked.
-	let "DIFF_IDLE=$IDLE-$PREV_IDLE"
-   let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
-	let "DIFF_USAGE=100*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL"
-
-   echo "$TOTAL $IDLE $DIFF_USAGE"
-}
-
-getmem(){
-   MEM=(`/usr/bin/free -m | grep 'Mem'`)
-   let "FREE=${MEM[3]}+${MEM[5]}+${MEM[6]}"
-   let "MEM_USAGE=(100*(${MEM[1]}-$FREE))/${MEM[1]}"
-
-   echo "$MEM_USAGE%"
-}
-
-FULL=`cat /sys/class/power_supply/BAT1/energy_full`
-battery(){
-   CHARGE=`cat /sys/class/power_supply/BAT1/energy_now`
-   STATUS=`cat /sys/class/power_supply/BAT1/status`
-	let "CHARGE=${CHARGE}*100/${FULL}"
-	case $STATUS in
-		Full)
-	   	SIGN="=";;
-		Charging)
-		   SIGN="+";;
-		Discharging)
-			SIGN="-";;
-	esac
-	echo "${CHARGE}%${SIGN}"
-}
-
-INDEX=25
-while true; do
-	cpuusage=(`getcpu`)
-   PREV_TOTAL=${cpuusage[0]}
-	PREV_IDLE=${cpuusage[1]}
-
-	if [ "$INDEX" -gt 20 ] ; then
-		GMAIL=`~/.local/scripts/gmail.py`
-		INDEX=1
+if [ `xrandr | grep -c ' connected '` -eq 2 ]; then #dual-monitor
+	if [ `xrandr | grep VGA1 | grep -c ' connected '` -eq 1 ]; then
+		xrandr --output LVDS1 --auto --primary --output VGA1 --auto --right-of LVDS1
 	fi
-	xsetroot -name "CPU: ${cpuusage[2]}% | Mem: `getmem` | Mail: ${GMAIL} | Bat: `battery` | `date +'%A, %B %d %H:%M'`"
+	if [ `xrandr | grep DVI1 | grep -c ' connected '` -eq 1 ]; then
+		xrandr --output LVDS1 --auto --primary --output DVI1 --auto --right-of LVDS1
+	fi
+	xsetroot -solid \#333333
+else
+	xrandr --output LVDS1 --auto --primary --output VGA1 --off --output DVI1 --off
+	feh --bg-center ~/SnowLeopard/Wallpapers/hummingbird.jpg
+#	feh --bg-center ~/SnowLeopard/Wallpapers/wood_wallpaper.jpg
+fi
 
-	let "INDEX=${INDEX}+1"
-	sleep 5
-done &
+xbacklight -set 50
+xsetroot -cursor_name left_ptr
+xmodmap -e "keycode 134 = Multi_key"
 
-# Exec dwm
-exec ~/dwm/dwm 
+# SCIM Setup
+export XMODIFIERS=@im=SCIM
+export GTK_IM_MODULE="scim"
 
+ck-launch-session nm-applet --sm-disable &
+mpd ~/.mpd/mpd.conf 
+stalonetray &
+
+# dwm
+conky | while read -r; do xsetroot -name "`echo -e $REPLY`"; done &
+exec ~/dwm/dwm
+
+# i3
+#(sleep 1s && conky -c ~/.conkyrc_i3 | dzen2 -bg black -fg white -fn -*-clean-medium-r-*-*-12-*-*-*-*-*-*-* -p -w 450 -h 16 -x 750 -y 0 -ta r) &
+#exec ~/i3/i3
