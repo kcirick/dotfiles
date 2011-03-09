@@ -1,0 +1,35 @@
+URxvt.buffered:         true
+URxvt.background:       black
+URxvt.foreground:       white
+URxvt.scrollstyle:      plain
+URxvt.scrollBar_right:  true
+
+URxvt.transparent:      true
+URxvt.shading:          50
+URxvt.tint:             black
+
+! -- Colours -- !
+! black
+*color0:#555753
+*color8:#202020
+! red
+*color1:#CC0000
+*color9:#EF2929
+! green
+*color2:#6AAD2B
+*color10:#ABFD5B
+! yellow
+*color3:#C4A000
+*color11:#FCE94F
+! blue
+*color4:#3465A4
+*color12:#1793D0
+! magenta
+*color5:#948696
+*color13:#BCACBB
+! cyan
+*color6:#06989A
+*color14:#34E2E2
+! white
+*color7:#EEEEEE
+*color15:#FFFFFF

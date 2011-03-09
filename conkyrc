@@ -1,12 +1,14 @@
-background 			no
-out_to_x				no
-out_to_console		yes
-update_interval	10.0
-total_run_times	0
+background no
+out_to_console yes
+out_to_x	no
+update_interval 5
+total_run_times 0
+use_spacer none
 
 TEXT
-^i(/home/rueno/Icons/cpu.xbm) ${cpu}% ^fg(\#1793D0)|^fg() \
-^i(/home/rueno/Icons/mem.xbm) ${memperc}% ^fg(\#1793D0)|^fg() \
-^i(/home/rueno/Icons/mail.xbm) ${execi 60 python ~/.local/scripts/gmail.py} ^fg(\#1793D0)|^fg() \
-^i(/home/rueno/Icons/bat.xbm) ${battery BAT1} \
-[^fg(\#1793D0)${time %A, %B %d %H:%M}^fg()]
+\x02CPU\x01${cpu cpu1}% ${cpu cpu2}%\
+\x02Mem\x01$memperc%\
+\x02Mail\x01${execi 60 ~/.local/scripts/gmail.py} new\
+\x02Vol\x01${mixer}%\
+\x02Bat\x01${battery_percent}%\
+\x02 | \x01${time %a, %b %d %H:%M}
