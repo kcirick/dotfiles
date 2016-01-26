@@ -1,12 +1,14 @@
-URxvt.buffered:         true
-URxvt.background:       black
-URxvt.foreground:       white
-URxvt.scrollstyle:      plain
-URxvt.scrollBar_right:  true
+urxvt.buffered:         true
+urxvt.background:       black
+urxvt.foreground:       white
+urxvt.scrollstyle:      plain
+urxvt.scrollBar_right:  true
+!URxvt*font: xft:Monospace:pixelsize=10
+URxvt*font: xft:Terminus:pixelsize=10
 
-URxvt.transparent:      true
-URxvt.shading:          50
-URxvt.tint:             black
+!urxvt.transparent:     true
+!urxvt.shading:         50
+!urxvt.tint:            black
 
 ! -- Colours -- !
 ! black
