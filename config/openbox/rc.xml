@@ -145,7 +145,7 @@
     <keybind key="W-S-5">
       <action name="SendToDesktop"><to>5</to></action>
     </keybind>
-    <keybind key="W-d">
+    <keybind key="W-S-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
     <!-- Keybindings for windows -->
@@ -207,7 +207,7 @@
       </action>
     </keybind>
     <!-- Window tiling -->
-    <keybind key="KP_1">
+    <keybind key="W-z">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
         <width>50%</width>
@@ -216,7 +216,7 @@
       <action name="MoveToEdgeWest"/>
       <action name="MoveToEdgeSouth"/>
     </keybind>
-    <keybind key="KP_2">
+    <keybind key="W-x">
       <action name="UnmaximizeFull"/>
       <action name="MaximizeHorz"/>
       <action name="MoveResizeTo">
@@ -224,7 +224,7 @@
       </action>
       <action name="MoveToEdgeSouth"/>
     </keybind>
-    <keybind key="KP_3">
+    <keybind key="W-c">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
         <width>50%</width>
@@ -233,7 +233,7 @@
       <action name="MoveToEdgeEast"/>
       <action name="MoveToEdgeSouth"/>
     </keybind>
-    <keybind key="KP_4">
+    <keybind key="W-a">
       <action name="UnmaximizeFull"/>
       <action name="MaximizeVert"/>
       <action name="MoveResizeTo">
@@ -241,10 +241,10 @@
       </action>
       <action name="MoveToEdgeWest"/>
     </keybind>
-    <keybind key="KP_5">
+    <keybind key="W-s">
       <action name="ToggleMaximize"/>
     </keybind>
-    <keybind key="KP_6">
+    <keybind key="W-d">
       <action name="UnmaximizeFull"/>
       <action name="MaximizeVert"/>
       <action name="MoveResizeTo">
@@ -252,7 +252,7 @@
       </action>
       <action name="MoveToEdgeEast"/>
     </keybind>
-    <keybind key="KP_7">
+    <keybind key="W-q">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
         <width>50%</width>
@@ -261,7 +261,7 @@
       <action name="MoveToEdgeWest"/>
       <action name="MoveToEdgeNorth"/>
     </keybind>
-    <keybind key="KP_8">
+    <keybind key="W-w">
       <action name="UnmaximizeFull"/>
       <action name="MaximizeHorz"/>
       <action name="MoveResizeTo">
@@ -269,7 +269,7 @@
       </action>
       <action name="MoveToEdgeNorth"/>
     </keybind>
-    <keybind key="KP_9">
+    <keybind key="W-e">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
         <width>50%</width>
@@ -281,11 +281,7 @@
     <!-- Keybindings for running applications -->
     <keybind key="W-S-Return">
       <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Terminal</name>
-        </startupnotify>
-        <command>urxvt</command>
+        <command>urxvtc</command>
       </action>
     </keybind>
     <keybind key="W-S-w">

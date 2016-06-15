@@ -1,15 +1,11 @@
-!! Natura by quandar (http://deletefactory.net/quandar)
-
 !! Global Width
-window.handle.width: 2
+window.handle.width: 0
 
 window.client.padding.width: 0
 window.client.padding.height: 0
-border.Width: 1
-padding.width: 1
+border.Width: 2
+padding.width: 2
 
-window.active.border.color: #000000
-window.inactive.border.color: #000000
 menu.border.color: #000000
 menu.overlap: 0
 window.frameColor: #eeeeee
@@ -32,6 +28,7 @@ menu.items.active.bg.color:  #6b7a8f
 menu.items.active.text.color: #f9f2ee
 
 !! Active Windows
+window.active.border.color: #6b7a8f
 window.active.title.bg: flat solid 
 window.active.title.bg.color: #6b7a8f
 window.active.*.bg.border.color: #000000
@@ -59,13 +56,13 @@ window.active.handle.bg.color:#6b7a8f
 window.*.grip.bg:  flat solid 
 window.*.grip.bg.color: #6b7a8f
 
-window.handle.width: 2
+window.handle.width: 0
 
 !! Inactive Windows
-window.inactive.title.bg: flat gradient vertical
-window.inactive.title.bg.color: #f0ece3
-window.inactive.title.bg.colorTo: #f8f7f2
-window.inactive.*.border.color: #bfbfbf
+window.inactive.border.color: #c8c8c8
+window.inactive.title.bg: flat solid
+window.inactive.title.bg.color: #c8c8c8
+window.inactive.*.border.color: #000000
 
 window.inactive.label.bg: parentrelative
 window.inactive.label.text.color: #919191
@@ -90,7 +87,7 @@ window.inactive.handle.bg.color: #f9f7f3
 window.inactive.grip.bg:  parentrelative
 
 !! Fonts
-!!window.active.label.text.font: shadow=y:shadowoffset=1:shadowtint=75
-!!window.inactive.label.text.font: shadow=y:shadowoffset=1:shadowtint=0
+!!window.active.label.text.font: shadow=n
+!!window.inactive.label.text.font: shadow=n:
 !!menu.items.font: 
 !!menu.title.text.font: shadow=y:shadowoffset=1:shadowtint=75

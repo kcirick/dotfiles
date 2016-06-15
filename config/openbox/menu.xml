@@ -15,20 +15,17 @@
 	<item label="Calculator">
 		<action name="Execute"><command>galculator</command></action>
 	</item>
-   <item label="Transmission">
-      <action name="Execute"><command>transmission-gtk</command></action>
-   </item>
-   <item label="gFTP">
-      <action name="Execute"><command>gftp</command></action>
-   </item>
+	<item label="Homebank">
+		<action name="Execute"><command>homebank</command></action>
+	</item>
+	<item label="Libreoffice">
+		<action name="Execute"><command>libreoffice</command></action>
+	</item>
 </menu>
 
 <menu id="multimedia" label="Multimedia">
-   <item label="DeaDBeeF">
-      <action name="Execute"><command>deadbeef</command></action>
-   </item>
-   <item label="VLC">
-      <action name="Execute"><command>vlc</command></action>
+   <item label="Audacious">
+      <action name="Execute"><command>audacious</command></action>
    </item>
 	<item label="Viewnior">
 		<action name="Execute"><command>viewnior</command></action>
@@ -39,9 +36,19 @@
 </menu>
 
 <menu id="system-menu" label="System">
-  <item label="Lxappearance-ObConf">
+  <item label="Synaptic">
+    <action name="Execute"><execute>gksu synaptic</execute></action>
+  </item>
+  <item label="Lxappearance">
     <action name="Execute"><execute>lxappearance</execute></action>
   </item>
+  <item label="PulseAudio Prefs">
+    <action name="Execute"><execute>paprefs</execute></action>
+  </item>
+  <item label="Pavucontrol">
+    <action name="Execute"><execute>pavucontrol</execute></action>
+  </item>
+  <separator />
   <item label="Reconfigure">
     <action name="Reconfigure" />
   </item>
@@ -70,10 +77,7 @@
   </item>
   <separator />
   <item label="Suspend">
-     <action name="Execute"><execute>dbus-send --system --dest=org.freedesktop.UPower --type=method_call --print-reply /org/freedesktop/UPower org.freedesktop.UPower.Suspend</execute></action>
-  </item>
-  <item label="Lock">
-     <action name="Execute"><execute>xscreensaver-command -lock</execute></action>
+     <action name="Execute"><execute>systemctl suspend</execute></action>
   </item>
   <item label="Exit">
     <action name="Exit" />

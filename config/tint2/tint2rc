@@ -3,32 +3,43 @@
 # BACKGROUND AND BORDER
 #---------------------------------------------
 rounded = 0
-border_width = 1
+border_width = 0
 background_color = #424242 100
 border_color = #424242 100
 
 rounded = 0
-border_width = 1
+border_width = 0
 background_color = #c8c8c8 100
-border_color = #424242 100
+border_color = #c8c8c8 100
 
 rounded = 0
 border_width = 2
-#background_color = #c8c8c8 100
+background_color = #c8c8c8 100
+border_color = #6b7a8f 100
+
+rounded = 0
+border_width = 0
 background_color = #6b7a8f 100
-#border_color = #800001 100
-#border_color = #6b7a8f 100
 
 # PANEL
 #---------------------------------------------
 panel_monitor = 1
 panel_position = top center
-panel_size = 100% 24
+panel_size = 100% 30
+panel_items = LTSC
 
 panel_margin = 0 0
-panel_padding = 0 0
+panel_padding = 3 0 2
 font_shadow = 0
 panel_background_id = 1
+
+# LAUNCHER
+#---------------------------------------------
+launcher_padding = 5 0 0
+launcher_background_id = 1
+launcher_icon_size = 30
+launcher_tooltip = 0
+launcher_item_app = /usr/share/applications/menu.desktop
 
 # TASKBAR
 #---------------------------------------------
@@ -37,7 +48,7 @@ taskbar_name = 0
 taskbar_name_font = ohsnap 9
 taskbar_name_active_font_color = #000000 100
 taskbar_name_font_color = #424242 100
-taskbar_padding = 5 1
+taskbar_padding = 0 0 2
 taskbar_background_id = 2
 taskbar_active_background_id = 3
 
@@ -45,31 +56,31 @@ taskbar_active_background_id = 3
 #---------------------------------------------
 task_icon = 1
 task_text = 0
-task_maximum_size = 24 24
+task_maximum_size = 45 24
 task_centered = 1
-task_padding = 1 1
+task_padding = 15 2
 task_font = ohsnap 9
 task_active_font_color = #ffffff 100
 task_font_color = #424242 100
 task_background_id = 0
-task_active_background_id = 0
+task_active_background_id = 4
 task_tooltip = 0
-task_icon_asb = 50 0 0
+task_icon_asb = 100 0 0
 task_active_icon_asb = 100 0 0
-task_iconified_icon_asb = 20 0 0
+task_iconified_icon_asb = 25 0 0
 
 # SYSTRAY
 #---------------------------------------------
-systray_padding =  1 1
+systray_padding =  2 2
 systray_background_id = 1
-systray_icon_size = 18
+systray_icon_size = 24
 
 # CLOCK
 #---------------------------------------------
 time1_format = %a %b %d, %H:%M
-time1_font = ohsnap 9
+time1_font = Terminus Bold 10 
 clock_font_color = #ffffff 100
-clock_padding = 6 0
+clock_padding = 4 4
 clock_background_id = 1
 clock_lclick_command = gsimplecal 
 
