@@ -1,0 +1,11 @@
+background        no
+out_to_x          no
+out_to_console    yes
+update_interval   2.0
+total_run_times   0
+
+TEXT
+_CONKY CPU ${cpu cpu0}% ${cpu cpu1}% ${cpu cpu2}% ${cpu cpu3}% %{F\#666666}|%{F-} \
+MEM ${memperc}%  \
+%{B\#666666}  ${time %a, %b %d %H:%M}  %{B-}
+

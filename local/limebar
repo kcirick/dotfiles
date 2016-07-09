@@ -1,0 +1,88 @@
+#!/bin/bash
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
+
+# Window counter
+WinCounter() {
+   cur=$1
+   allwinid=$(echo $2 | cut -d' ' -f5- | sed 's/,//g')
+   
+   for w in `seq 0 $((tot-1))`; do
+      counter[$w]=0
+   done
+
+   for win in ${allwinid[@]}; do
+      wsid=`xprop -id $win _NET_WM_DESKTOP | awk '{print $3}'`
+      counter[$wsid]=$((${counter[$wsid]} +1 ))
+   done
+
+   echo ${counter[*]}
+}
+
+# Workspaces
+Workspaces() {
+   cur=$1
+   wincount=($2)
+
+   line=""
+   for w in `seq 0 $((tot-1))`; do
+      
+      if [ $w -eq $cur ]; then
+         if [ ${wincount[$w]} -eq 0 ]; then
+            line="${line}%{F#EEEEEE}%{A:xdotool key Alt_L+$((w+1)):} \uf10c %{A}%{F-}"
+         else
+            line="${line}%{F#EEEEEE}%{A:xdotool key Alt_L+$((w+1)):} \uf111 %{A}%{F-}"
+         fi
+         cur_counter=${wincount[$w]}
+      else
+         if [ ${wincount[$w]} -eq 0 ]; then
+            line="${line}%{F#666666}%{A:xdotool key Alt_L+$((w+1)):} \uf10c %{A}%{F-}"
+         else
+            line="${line}%{F#666666}%{A:xdotool key Alt_L+$((w+1)):} \uf111 %{A}%{F-}"
+         fi
+      fi
+   done
+
+   echo -e "$line %{B#666666}  $cur_counter  %{B-} "
+}
+
+
+trayer \
+   --expand true \
+   --edge top --align right \
+   --widthtype pixel --width 140 --height 28 \
+   --transparent true --alpha 0 --tint 0x424242 &
+#
+{
+   conky &
+   xprop -spy -root _NET_ACTIVE_WINDOW _NET_CURRENT_DESKTOP _NET_CLIENT_LIST
+} 2> /dev/null | {
+   while true; do 
+      read line || break
+
+      case $line in
+         _CONKY*)                # Conky output
+            conky=$(echo -e $line | cut -d' ' -f2- )
+            ;;
+         _NET_ACTIVE_WINDOW*)    # Window title
+            wid=$(echo ${line} | awk '{print $5}')
+            title=""
+            if [ "$wid" != "0x0" ]; then
+               title=$(xdotool getwindowname $wid)
+            fi
+            ;;
+         _NET_CLIENT_LIST*)      # Client List
+            wc=$(WinCounter $ws "$line")
+            workspaces=$(Workspaces $ws "$wc")
+            ;;
+         _NET_CURRENT_DESKTOP*)  # Desktop names
+            ws=$(echo ${line} | awk '{print $3}')
+            workspaces=$(Workspaces $ws "$wc")
+            ;;
+         esac
+      printf "%s\n" "%{l}${workspaces} ${title}%{r}${conky} "
+   done
+} 2> /dev/null | lemonbar -p -f Terminus-14 -f FontAwesome-11 -g 1780x28+0+0 -u 2 -B "#424242" | sh
+
