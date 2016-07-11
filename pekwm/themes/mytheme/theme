@@ -1,0 +1,207 @@
+# Pekwm theme
+
+$FONT = "XFT#Sans:size=9#Left"
+$FONT_TITLE = "XFT#Sans:size=9#Center"
+
+Require {
+  Templates = "True"
+}
+
+Define = "BaseDecor" {
+  Height = "5"
+
+  # Increase first number to bring title text downwards
+  Pad = "0 0 0 0"
+
+  Focused = "Solid #325F9B"
+  Unfocused = "Solid #D4D4D4"
+
+  Tab {
+    Focused = "Solid #D4D4D4"
+    FocusedSelected = "Solid #325F9B"
+    Unfocused = "Solid #D4D4D4"
+    UnfocusedSelected = "Solid #D4D4D4"
+  }
+  Separator {
+    Focused = "Solid #325F9B"
+    Unfocused = "Solid #325F9B"
+  }
+  Font {
+    Focused = "Empty"
+  }
+  FontColor {
+    Focused = "#ffc571"
+    FocusedSelected = "white"
+    Unfocused = "#777777"
+    UnfocusedSelected = "#777777"
+  }
+  Border {
+    Focused {
+      Top      = "Solid #325F9B 3x3"
+      Left     = "Solid #325F9B 3x3"
+      Right    = "Solid #325F9B 3x3"
+      Bottom   = "Solid #325F9B 3x3"
+    }
+    Unfocused {
+      Top      = "Solid #D4D4D4 3x3"
+      Left     = "Solid #D4D4D4 3x3"
+      Right    = "Solid #D4D4D4 3x3"
+      Bottom   = "Solid #D4D4D4 3x3"
+    }
+  }
+}
+
+Define = "BaseButtons" {
+  #Buttons {
+  #  Right = "Close" {
+  #    Focused = "Image button.png"
+  #    Unfocused = "Image button_unfocus.png"
+  #    Hoover = "Image button_hover.png"
+  #    Pressed = "Image button_press.png"
+  #    Button = "1" { Actions = "Close" }
+  #    Button = "3" { Actions = "Kill" }
+  #  }
+
+  #  Right = "Maximize" {
+  #    Focused = "Image button.png"
+  #    Unfocused = "Image button_unfocus.png"
+  #    Hoover = "Image button_hover.png"
+  #    Pressed = "Image button_press.png"
+  #    Button = "1" { Actions = "Toggle Maximized 1 1" }
+  #  }
+
+  #  Right = "Iconify" {
+  #    Focused = "Image button.png"
+  #    Unfocused = "Image button_unfocus.png"
+  #    Hoover = "Image button_hover.png"
+  #    Pressed = "Image button_press.png"
+  #    Button = "1" { Actions = "Set Iconified" }
+  #  }
+  #}
+}
+
+Define = "EmptyDecor" {
+  Focused = "Empty"
+  Unfocused = "Empty"
+
+  Tab {
+    Focused = "Empty"
+    FocusedSelected = "Empty"
+    Unfocused = "Empty"
+    UnfocusedSelected = "Empty"
+  }
+
+  Separator {
+    Focused = "Empty"
+    Unfocused = "Empty"
+  }
+
+  Font {
+    Focused = "Empty"
+  }
+
+  FontColor {
+    Focused = "Empty"
+    FocusedSelected = "Empty"
+    Unfocused = "Empty"
+    UnfocusedSelected = "Empty"
+  }    
+
+  Border {
+    Focused {
+      TopLeft = "Empty"
+      Top = "Empty"
+      TopRight = "Empty"
+      Left =  "Empty"
+      Right = "Empty"
+      BottomLeft = "Empty"
+      Bottom = "Empty"
+      BottomRight = "Empty"
+    }
+    Unfocused {
+      TopLeft = "Empty"
+      Top = "Empty"
+      TopRight = "Empty"
+      Left =  "Empty"
+      Right = "Empty"
+      BottomLeft = "Empty"
+      Bottom = "Empty"
+      BottomRight = "Empty"
+    }
+  }
+}
+
+PDecor {
+  Decor = "Default" {
+    Title {
+      @BaseDecor
+      @BaseButtons
+    }
+  }
+
+  Decor = "Menu" {
+    Title {
+      @BaseDecor
+      #Height = "0"
+    }
+  }
+
+  Decor = "Titlebarless" {
+    Title {
+      @EmptyDecor
+    }
+  }
+
+  Decor = "Statuswindow" {
+    Title {
+      @EmptyDecor
+    }
+  }
+}
+
+Harbour {
+  Texture = "Solid #f9f9f9"
+}
+
+Menu {
+  Pad = "0 0 4 4" 
+
+  Focused {
+    Font = "$FONT"
+    Background = "Solid #f9f9f9"
+    Item = "Empty"
+    Text = "#666666" 
+    Separator = "Image menuline.png#Scaled"
+    Arrow = "Image arrow.png"
+  }
+  Unfocused {
+    Font = "$FONT"
+    Background = "Solid #f9f9f9"
+    Item = "Empty"
+    Text = "#777777"
+    Separator = "Image menuline.png#Scaled"
+    Arrow = "Image arrow.png"
+  }
+  Selected {
+    Font = "$FONT"
+    Background = "Solid #f88408"
+    Item = "Solid #666666"
+    Text = "#ffffff"
+    Arrow = "Image arrow_focus.png"
+  }
+}
+
+CmdDialog {
+  Font = "$FONT"
+  Texture = "Solid #ffffff"
+  Text = "#000000"
+  Pad = "3 0 1 10"
+}
+
+Status {
+  Font = "$FONT"
+  Texture = "Solid #ffffff"
+  Text = "#8b8b89"
+  Pad = "2 2 10 10"
+}
+

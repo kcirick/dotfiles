@@ -1,6 +1,11 @@
 #!/bin/bash
 
+#PANEL_FIFO=~/.panel.fifo
+
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+#[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+#mkfifo "$PANEL_FIFO"
 
 tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
 
@@ -49,19 +54,18 @@ Workspaces() {
 }
 
 
-trayer \
-   --expand true \
-   --edge top --align right \
-   --widthtype pixel --width 140 --height 28 \
-   --transparent true --alpha 0 --tint 0x424242 &
+#trayer \
+#   --expand true \
+#   --edge top --align right \
+#   --widthtype pixel --width 140 --height 28 \
+#   --transparent true --alpha 0 --tint 0x424242 &
 #
-{
-   conky &
-   xprop -spy -root _NET_ACTIVE_WINDOW _NET_CURRENT_DESKTOP _NET_CLIENT_LIST
-} 2> /dev/null | {
-   while true; do 
-      read line || break
 
+{
+   exec conky &
+   xprop -spy -root _NET_ACTIVE_WINDOW _NET_CURRENT_DESKTOP _NET_CLIENT_LIST &
+} | {
+   while read -r line; do 
       case $line in
          _CONKY*)                # Conky output
             conky=$(echo -e $line | cut -d' ' -f2- )
@@ -79,10 +83,12 @@ trayer \
             ;;
          _NET_CURRENT_DESKTOP*)  # Desktop names
             ws=$(echo ${line} | awk '{print $3}')
+            wc=$(WinCounter $ws "`xprop -root _NET_CLIENT_LIST`")
             workspaces=$(Workspaces $ws "$wc")
             ;;
-         esac
+      esac
       printf "%s\n" "%{l}${workspaces} ${title}%{r}${conky} "
    done
-} 2> /dev/null | lemonbar -p -f Terminus-14 -f FontAwesome-11 -g 1780x28+0+0 -u 2 -B "#424242" | sh
+} | lemonbar -p -f Terminus-14 -f FontAwesome-11 -g 1780x28+0+0 -u 2 -B "#424242" | sh &
 
+wait
