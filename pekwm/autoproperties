@@ -178,6 +178,9 @@ Property = "^(gecko|Gecko|firefox-bin),^Firefox-bin,,^Customize Toolbar\$" {
 
 TypeRules {
 	INCLUDE = "$_PEKWM_ETC_PATH/autoproperties_typerules"
+   Property = "NORMAL" {
+      Titlebar = "False"
+   }
 }
 
 /*

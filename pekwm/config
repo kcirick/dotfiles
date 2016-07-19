@@ -14,3 +14,7 @@ Screen {
         Model = "CenteredOnParent Smart MouseNotUnder"
     }
 }
+
+Menu {
+   Enter = "Motion"
+}

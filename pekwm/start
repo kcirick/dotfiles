@@ -21,14 +21,17 @@ display -window root ~/Pictures/Wallpapers/debian_minimal.png
 
 setxkbmap -option compose:ralt
 
-~/.local/bin/limebar &
 trayer \
    --expand true \
-   --edge top --align right \
-   --widthtype pixel --width 140 --height 28 \
+   --edge top --align right --margin 178 \
+   --widthtype request --height 30 \
    --transparent true --alpha 0 --tint 0x424242 &
 
-sleep 1 && volumeicon &
+sleep 1
+
+volumeicon &
 #glista &
 
 urxvtd -q -f -o
+
+~/.local/bin/limebar &

@@ -1,13 +1,14 @@
 #!/bin/bash
+# Make sure trayer is running BEFOREHAND
 
-#PANEL_FIFO=~/.panel.fifo
-
-trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
-
-#[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-#mkfifo "$PANEL_FIFO"
+#trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
+
+# Helper function for date
+uniq_linebuffered() {
+   awk -W interactive '$0 != l { print ; l=$0 ; fflush(); }' "$@"
+}
 
 # Window counter
 WinCounter() {
@@ -50,25 +51,36 @@ Workspaces() {
       fi
    done
 
-   echo -e "$line %{B#666666}  $cur_counter  %{B-} "
+   echo -e "$line %{B#666666}%{A:xdotool key Super_L+Tab:}  $cur_counter  %{A}%{B-} "
 }
 
 
-#trayer \
-#   --expand true \
-#   --edge top --align right \
-#   --widthtype pixel --width 140 --height 28 \
-#   --transparent true --alpha 0 --tint 0x424242 &
-#
-
 {
-   exec conky &
-   xprop -spy -root _NET_ACTIVE_WINDOW _NET_CURRENT_DESKTOP _NET_CLIENT_LIST &
+   while true ; do
+      # "date" output is checked once a second, but an event is only
+      # generated if the output changed compared to the previous run.
+      date +"DATE%a %b %d, %H:%M"
+      sleep 5 || break
+   done > >(uniq_linebuffered) & 
+   childpid1=$!
+   conky &
+   childpid2=$!
+   xprop -spy -root _NET_ACTIVE_WINDOW _NET_CLIENT_LIST _NET_CURRENT_DESKTOP &
+   xprop -name panel -f WM_SIZE_HINTS 32i ' $5\n' -spy WM_NORMAL_HINTS
+
+   kill $childpid1
+   kill $childpid2
 } | {
+   tw=0
+   # Need an initial value for _NET_CURRENT_DESKTOP
+   ws=`xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}'`
    while read -r line; do 
       case $line in
-         _CONKY*)                # Conky output
-            conky=$(echo -e $line | cut -d' ' -f2- )
+         DATE*)                  # Date
+            date="%{B#666666}%{A:gsimplecal &:}  ${line#????}  %{A}%{B-}"
+            ;;
+         CONKY*)                 # Conky output
+            conky=$(echo -e ${line#?????})
             ;;
          _NET_ACTIVE_WINDOW*)    # Window title
             wid=$(echo ${line} | awk '{print $5}')
@@ -83,12 +95,14 @@ Workspaces() {
             ;;
          _NET_CURRENT_DESKTOP*)  # Desktop names
             ws=$(echo ${line} | awk '{print $3}')
-            wc=$(WinCounter $ws "`xprop -root _NET_CLIENT_LIST`")
             workspaces=$(Workspaces $ws "$wc")
             ;;
+         WM_NORMAL_HINTS*)       # trayer width
+            tw=$(echo ${line} | awk '{print $2}')
+            ;;
       esac
-      printf "%s\n" "%{l}${workspaces} ${title}%{r}${conky} "
+      printf "%s\n" "%{l}${workspaces} ${title}%{r}${conky} %{O$tw} ${date}"
    done
-} | lemonbar -p -f Terminus-14 -f FontAwesome-11 -g 1780x28+0+0 -u 2 -B "#424242" | sh &
+} | lemonbar -p -f Terminus-14 -f FontAwesome-11 -g 1920x30+0+0 -u 2 -B "#424242" | sh &
 
 wait

@@ -1,6 +1,6 @@
 # Pekwm theme
 
-$FONT = "XFT#Sans:size=9#Left"
+$FONT = "XFT#Sans:size=10#Left"
 $FONT_TITLE = "XFT#Sans:size=9#Center"
 
 Require {
@@ -8,45 +8,103 @@ Require {
 }
 
 Define = "BaseDecor" {
-  Height = "5"
+  Height = "18"
 
   # Increase first number to bring title text downwards
-  Pad = "0 0 0 0"
+  Pad = "2 0 0 0"
 
-  Focused = "Solid #325F9B"
+  Focused = "Solid #48658F"
   Unfocused = "Solid #D4D4D4"
 
   Tab {
     Focused = "Solid #D4D4D4"
-    FocusedSelected = "Solid #325F9B"
+    FocusedSelected = "Solid #48658F"
     Unfocused = "Solid #D4D4D4"
     UnfocusedSelected = "Solid #D4D4D4"
   }
   Separator {
-    Focused = "Solid #325F9B"
-    Unfocused = "Solid #325F9B"
+    Focused = "Solid #48658F"
+    Unfocused = "Solid #48658F"
   }
   Font {
-    Focused = "Empty"
+    Focused = "$FONT_TITLE"
   }
   FontColor {
-    Focused = "#ffc571"
-    FocusedSelected = "white"
+    Focused = "#666666"
+    FocusedSelected = "#DEDEDE"
     Unfocused = "#777777"
     UnfocusedSelected = "#777777"
   }
   Border {
     Focused {
-      Top      = "Solid #325F9B 3x3"
-      Left     = "Solid #325F9B 3x3"
-      Right    = "Solid #325F9B 3x3"
-      Bottom   = "Solid #325F9B 3x3"
+      TopRight = "Solid #48658F 3x3"
+      Top      = "Solid #48658F 3x3"
+      TopLeft  = "Solid #48658F 3x3"
+      Left     = "Solid #48658F 3x3"
+      Right    = "Solid #48658F 3x3"
+      BottomRight = "Solid #48658F 3x3"
+      Bottom   = "Solid #48658F 3x3"
+      BottomLeft = "Solid #48658F 3x3"
     }
     Unfocused {
+      TopRight = "Solid #D4D4D4 3x3"
       Top      = "Solid #D4D4D4 3x3"
+      TopLeft  = "Solid #D4D4D4 3x3"
       Left     = "Solid #D4D4D4 3x3"
       Right    = "Solid #D4D4D4 3x3"
+      BottomRight = "Solid #D4D4D4 3x3"
       Bottom   = "Solid #D4D4D4 3x3"
+      BottomLeft = "Solid #D4D4D4 3x3"
+    }
+  }
+}
+
+Define = "TLDecor" {
+  Focused = "Empty"
+  Unfocused = "Empty"
+
+  Tab {
+    Focused = "Empty"
+    FocusedSelected = "Empty"
+    Unfocused = "Empty"
+    UnfocusedSelected = "Empty"
+  }
+
+  Separator {
+    Focused = "Empty"
+    Unfocused = "Empty"
+  }
+
+  Font {
+    Focused = "$FONT_TITLE"
+  }
+  FontColor {
+    Focused = "#666666"
+    FocusedSelected = "#DEDEDE"
+    Unfocused = "#777777"
+    UnfocusedSelected = "#777777"
+  }
+
+  Border {
+    Focused {
+      TopRight = "Solid #48658F 3x3"
+      Top      = "Solid #48658F 3x3"
+      TopLeft  = "Solid #48658F 3x3"
+      Left     = "Solid #48658F 3x3"
+      Right    = "Solid #48658F 3x3"
+      BottomRight = "Solid #48658F 3x3"
+      Bottom   = "Solid #48658F 3x3"
+      BottomLeft = "Solid #48658F 3x3"
+    }
+    Unfocused {
+      TopRight = "Solid #D4D4D4 3x3"
+      Top      = "Solid #D4D4D4 3x3"
+      TopLeft  = "Solid #D4D4D4 3x3"
+      Left     = "Solid #D4D4D4 3x3"
+      Right    = "Solid #D4D4D4 3x3"
+      BottomRight = "Solid #D4D4D4 3x3"
+      Bottom   = "Solid #D4D4D4 3x3"
+      BottomLeft = "Solid #D4D4D4 3x3"
     }
   }
 }
@@ -141,14 +199,19 @@ PDecor {
 
   Decor = "Menu" {
     Title {
-      @BaseDecor
-      #Height = "0"
+      @TLDecor
+    }
+  }
+
+  Decor = "CmdDialog" {
+     Title {
+      @TLDecor
     }
   }
 
   Decor = "Titlebarless" {
     Title {
-      @EmptyDecor
+      @TLDecor
     }
   }
 
@@ -195,7 +258,7 @@ CmdDialog {
   Font = "$FONT"
   Texture = "Solid #ffffff"
   Text = "#000000"
-  Pad = "3 0 1 10"
+  Pad = "5 5 3 3"
 }
 
 Status {

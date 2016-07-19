@@ -1,13 +1,10 @@
 # Menu config for pekwm
 
-# Variables
-INCLUDE = "vars"
-
 RootMenu = "Pekwm" {
 	Entry = "Terminal" { Actions = "Exec urxvt" }
-   Entry = "Web Browser" { Actions = "Exec google-chrome" }
-	Entry = "Run.." { Actions = "Exec gmrun" }
-	#Entry = "Run.." { Actions = "ShowCmdDialog" }
+   #Entry = "Web Browser" { Actions = "Exec google-chrome" }
+   Entry = "Web Browser" { Actions = "Exec firefox" }
+   Entry = "Thunar" { Actions = "Exec thunar" }
 
 	Separator {}
 
@@ -15,7 +12,7 @@ RootMenu = "Pekwm" {
 	   Entry = "Leafpad" { Actions = "Exec leafpad" }
       Entry = "GVim" { Actions = "Exec gvim" }
       Entry = "Calculator" { Actions = "Exec galculator" }
-      Entry = "Homebank" { Actions = "Exec homebank" }
+      Entry = "Homebank" { Actions = "Exec GDK_CORE_DEVICE_EVENTS=1 homebank" }
       Entry = "Libreoffice" { Actions = "Exec libreoffice" }
       Entry = "Take screenshot" { Actions = "Exec $_PEKWM_SCRIPT_PATH/pekwm_screenshot.sh" }
    }
@@ -27,16 +24,19 @@ RootMenu = "Pekwm" {
    }
 
    Submenu = "System" {
-      Entry = "Synaptic" { Actions = "Exec sudo synaptic" }
+      Entry = "Synaptic" { Actions = "Exec sudo GDK_CORE_DEVICE_EVENTS=1 synaptic" }
       Entry = "LXAppearance" { Actions = "Exec lxappearance" }
-      Entry = "PulseAudio Prefs" { Actions = "Exec paprefs" }
-      Entry = "Pavucontrol" { Actions = "Exec pavucontrol" }
+      Entry = "PulseAudio Prefs" { Actions = "Exec GDK_CORE_DEVICE_EVENTS=1 paprefs" }
+      Entry = "Pavucontrol" { Actions = "Exec GDK_CORE_DEVICE_EVENTS=1 pavucontrol" }
       
       Separator {}
       Entry = "Reset Bluetooth" { Actions = "Exec sudo hciconfig hci0 reset" }
 		Entry = "Reload PekWM" { Actions = "Reload" }
 		Entry = "Restart PekWM" { Actions = "Restart" }
    }
+
+	Entry = "Run.." { Actions = "Exec gmrun" }
+	#Entry = "Run.." { Actions = "ShowCmdDialog" }
 
 	Separator {}
 

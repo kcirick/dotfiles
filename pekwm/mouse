@@ -6,6 +6,13 @@ $CLIENT_CLICK = "Focus"
 # Base mouse configuration
 INCLUDE = "$_PEKWM_ETC_PATH/mouse_system"
 
+Client {
+   ButtonPress = "1" { Actions = "Focus; Raise"}
+   Motion = "Mod1 1" { Actions = "" }
+   Motion = "Mod1 3" { Actions = "" }
+   Motion = "Mod4 3" { Actions = "Resize" }
+}
+
 # Swap comments on the two folling lines to switch between
 # sloppy and click to focus
 INCLUDE = "$_PEKWM_ETC_PATH/mouse_sloppy"
