@@ -8,7 +8,7 @@
 #   musca notion nwm olwm openbox oroborus pekwm ratpoison sapphire sawfish sscrotwm sithwm smallwm snapwm spectrwm stumpwm subtle tfwm tinywm tritium twm \
 #   uwm vtwm w9wm weewm wind windowlab wm2 wmaker wmfs wmii wmx xfwm4 xmonad xoat yeahwm fusionwm )
 
-wms=(fusionwm dwm openbox)
+wms=(fusionwm dwm openbox twobwm pekwm)
 
 # define colors for color-echo
 red="\e[31m"
@@ -20,7 +20,7 @@ prp="\e[35m"
 rst="\e[0m"
 
 color-echo() {  # print with colors
-   echo -e "$cyn$1: $rst$2"
+   printf "$cyn%10s : $rst$2\n" $1
 }
 
 print-kernel() {
@@ -83,6 +83,10 @@ print-distro() {
    fi
 }
 
+print-packages() {
+   color-echo 'Packages' $(dpkg --list | wc -l)
+}
+
 print-colors() {
    xrdb -load $HOME/.Xdefaults
 
@@ -110,12 +114,13 @@ print-colors() {
 echo -e "\n$prp$USER@$HOSTNAME$rst\n"
 print-distro
 print-uptime
+print-kernel
+print-cpu
+print-mem
 print-shell
 print-wm
 print-disk
-print-mem
-print-kernel
-print-cpu
+print-packages
 echo
 print-colors
 
