@@ -22,9 +22,6 @@ OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 # alt + middle click to lower the window
 OnWindow Mod1 Mouse2 :Lower
 
-Mod4 t :ToggleDecor
-Mod4 q :Close
-
 # control-click a window's titlebar and drag to attach windows
 OnWindow Control Mouse2 :StartTabbing
 
@@ -60,11 +57,13 @@ Mod1 Shift r :Exec gmrun
 #160 :Exec amixer sset Master,0 toggle
 
 # current window commands
-Mod1 F4 :Close
-Mod1 F5 :Kill
-Mod1 F9 :Minimize
-Mod1 F10 :Maximize
-Mod1 F11 :Fullscreen
+Mod4 t :ToggleDecor
+Mod4 s :Shade
+Mod4 q :Close
+Mod4 Shift q :Kill
+Mod4 i :Minimize
+Mod4 m :Maximize
+Mod4 Shift m :Fullscreen
 
 # tiling functions
 Mod1 t z :Exec moveresize.sh 1
