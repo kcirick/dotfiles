@@ -1,17 +1,17 @@
 # Pekwm theme
 
-$FONT = "XFT#Sans:size=10#Left"
-$FONT_TITLE = "XFT#Sans:size=9#Center"
+$FONT = "XFT#Terminus:size=10#Left"
+$FONT_TITLE = "XFT#Terminus:size=10#Left"
 
 Require {
   Templates = "True"
 }
 
 Define = "BaseDecor" {
-  Height = "18"
+  Height = "16"
 
   # Increase first number to bring title text downwards
-  Pad = "2 0 0 0"
+  Pad = "0 5 5 2"
 
   Focused = "Solid #48658F"
   Unfocused = "Solid #D4D4D4"
@@ -23,8 +23,8 @@ Define = "BaseDecor" {
     UnfocusedSelected = "Solid #D4D4D4"
   }
   Separator {
-    Focused = "Solid #48658F"
-    Unfocused = "Solid #48658F"
+    Focused = "Solid #777777 2x16"
+    Unfocused = "Solid #777777 2x16"
   }
   Font {
     Focused = "$FONT_TITLE"
@@ -110,32 +110,29 @@ Define = "TLDecor" {
 }
 
 Define = "BaseButtons" {
-  #Buttons {
-  #  Right = "Close" {
-  #    Focused = "Image button.png"
-  #    Unfocused = "Image button_unfocus.png"
-  #    Hoover = "Image button_hover.png"
-  #    Pressed = "Image button_press.png"
-  #    Button = "1" { Actions = "Close" }
-  #    Button = "3" { Actions = "Kill" }
-  #  }
+  Buttons {
+    Right = "Close" {
+      Focused = "Image close.png"
+      Unfocused = "Image close_unfocus.png"
+      Pressed = "Image close_pressed.png"
+      Button = "1" { Actions = "Close" }
+      Button = "3" { Actions = "Kill" }
+    }
 
-  #  Right = "Maximize" {
-  #    Focused = "Image button.png"
-  #    Unfocused = "Image button_unfocus.png"
-  #    Hoover = "Image button_hover.png"
-  #    Pressed = "Image button_press.png"
-  #    Button = "1" { Actions = "Toggle Maximized 1 1" }
-  #  }
+    Right = "Maximize" {
+      Focused = "Image max.png"
+      Unfocused = "Image max_unfocus.png"
+      Pressed = "Image max_pressed.png"
+      Button = "1" { Actions = "Toggle Maximized 1 1" }
+    }
 
-  #  Right = "Iconify" {
-  #    Focused = "Image button.png"
-  #    Unfocused = "Image button_unfocus.png"
-  #    Hoover = "Image button_hover.png"
-  #    Pressed = "Image button_press.png"
-  #    Button = "1" { Actions = "Set Iconified" }
-  #  }
-  #}
+    Right = "Iconify" {
+      Focused = "Image iconify.png"
+      Unfocused = "Image iconify_unfocus.png"
+      Pressed = "Image iconify_pressed.png"
+      Button = "1" { Actions = "Set Iconified" }
+    }
+  }
 }
 
 Define = "EmptyDecor" {
