@@ -1,100 +1,77 @@
 #!/bin/bash
+# moveresize.sh 0x0 3 3 1 1 1 2 true
+#                   | | | | | |   
+#                   | | | | | |-> size y
+#                   | | | | |---> size x
+#                   | | | |-----> position y
+#                   | | |-------> position x
+#                   | |---------> grid size y
+#                   |-----------> grid size x
+#
+# 
+#  |-----------------------|  Example:
+#  |       |       |       |  
+#  |  0/0  |  1/0  |  2/0  |  -> Grid is divided into 3x3
+#  |       |       |       |  -> Window is positioned at (x,y)=(1,1)
+#  |-----------------------|  -> Window dimension is 1x2 multiple of grid size
+#  |       ||-----||       |
+#  |  0/1  || 1/1 ||  2/1  |
+#  |       ||     ||       |
+#  |--------|     |--------|
+#  |       ||     ||       |
+#  |  0/2  || 1/2 ||  2/2  |
+#  |       ||-----||       |
+#  |-----------------------|
+#
 
-tiling=$1
-winid=`xprop -root _NET_ACTIVE_WINDOW | awk '{print $5}'`
-has_title=`xprop -id $winid | grep "_PEKWM_FRAME_DECOR" | awk '{print $3}'`
+#--- User inputs -----
+user_window=${1:-"0x0"}
+grid_size_x=${2:-1}
+grid_size_y=${3:-1}
+win_pos_x=${4:-0}
+win_pos_y=${5:-0}
+win_width=${6:-1}
+win_height=${7:-1}
+verbose=false
+if [ "$8" == "true" ]; then verbose=true; fi
+#---------------------
 
-monitor_x=1920
-monitor_y=1080
-bar_height=30
-border_width=3
-#title_height=$(($(xprop -id $winid _NET_FRAME_EXTENTS | awk '{print $5}' | cut -d, -f1) - $border_width ))
-title_height=0
-if [ "$has_title" != "" ]; then
-   [ $has_title -eq 6 ] && title_height=18
-fi
-
-if [ $tiling -gt 100 ]; then
-   
-   # --- Folding/Unfolding   
-   # 101 - fold from left   / 102 - unfold from left
-   # 111 - fold from right  / 112 - unfold from right
-   # 121 - fold from top    / 122 - unfold from top
-   # 131 - fold from bottom / 132 - unfold from bottom
-
-   old_pos=`xdotool getwindowgeometry $winid | grep Position | awk '{print $2}'`
-   old_pos_x=`echo $old_pos | cut -d, -f1`
-   old_pos_y=`echo $old_pos | cut -d, -f2`
-   old_size=`xdotool getwindowgeometry $winid | grep Geometry | awk '{print $2}'`
-   old_size_x=`echo $old_size | cut -dx -f1`
-   old_size_y=`echo $old_size | cut -dx -f2`
-
-   if [ $tiling -eq 101 -o $tiling -eq 111 ]; then
-      size_x=$(echo "$old_size_x/2" | bc)
-   elif [ $tiling -eq 102 -o $tiling -eq 112 ]; then
-      size_x=$(echo "$old_size_x*2" | bc)
-   else
-      size_x=$old_size_x
-   fi
-   if [ $tiling -eq 121 -o $tiling -eq 131 ]; then
-      size_y=$(echo "$old_size_y/2" | bc)
-   elif [ $tiling -eq 122 -o $tiling -eq 132 ]; then
-      size_y=$(echo "$old_size_y*2" | bc)
-   else
-      size_y=$old_size_y
-   fi
-
-   if [ $tiling -eq 101 ]; then
-      pos_x=$(echo "$old_pos_x + $size_x - 2*$border_width" | bc)
-   elif [ $tiling -eq 102 ]; then
-      pos_x=$(echo "$old_pos_x - $old_size_x - 2*$border_width" | bc)
-   else
-      pos_x=$(echo "$old_pos_x - 2*$border_width" | bc)
-   fi
-   if [ $tiling -eq 121 ]; then
-      pos_y=$(echo "$old_pos_y + $size_y - 2*($title_height+$border_width)" | bc)
-   elif [ $tiling -eq 122 ]; then
-      pos_y=$(echo "$old_pos_y - $old_size_y - 2*($title_height+$border_width)" | bc)
-   else
-      pos_y=$(echo "$old_pos_y - 2*($title_height+$border_width)" | bc)
-   fi
-
-   echo "wmctrl -r :ACTIVE: -e 0,$pos_x,$pos_y,$size_x,$size_y"
-   wmctrl -r :ACTIVE: -e 0,$pos_x,$pos_y,$size_x,$size_y
-
+if [ "$user_window" != "0x0" ]; then
+   win=$user_window
 else
-
-   #--- Regular tiling
-
-   if [ $tiling -eq 1 -o $tiling -eq 3 -o $tiling -eq 7 -o $tiling -eq 9 ]; then
-      size_x=$(echo "$monitor_x/2 - 2*$border_width" | bc)
-      size_y=$(echo "($monitor_y-$bar_height)/2 - 2*$border_width" | bc)
-   elif [ $tiling -eq 4 -o $tiling -eq 6 ]; then
-      size_x=$(echo "$monitor_x/2 - 2*$border_width" | bc)
-      size_y=$(echo "$monitor_y - 2*$border_width - $bar_height" | bc )
-   elif [ $tiling -eq 2 -o $tiling -eq 8 ]; then
-      size_x=$(echo "$monitor_x - 2*$border_width" | bc)
-      size_y=$(echo "($monitor_y-$bar_height)/2 - 2*$border_width" | bc)
-   else # [ $tiling -eq 5 ]
-      size_x=$(echo "$monitor_x - 2*$border_width" | bc )
-      size_y=$(echo "$monitor_y - 2*$border_width - $bar_height" | bc )
-   fi
-
-   if [ $tiling -eq 1 -o $tiling -eq 2 ]; then
-      pos_x=0
-      pos_y=$(echo "($monitor_y+$bar_height)/2" | bc)
-   elif [ $tiling -eq 3 ]; then
-      pos_x=$(echo "$monitor_x/2" | bc )
-      pos_y=$(echo "($monitor_y+$bar_height)/2" | bc)
-   elif [ $tiling -eq 6 -o $tiling -eq 9 ]; then
-      pos_x=$(echo "$monitor_x/2" | bc )
-      pos_y=$bar_height
-   else # [ $tiling -eq 4 -o $tiling -eq 5 -o $tiling -eq 7 -o $tiling -eq 8 ]
-      pos_x=0
-      pos_y=$bar_height
-   fi
-
-   echo "wmctrl -r :ACTIVE: -e 0,$pos_x,$pos_y,$size_x,$size_y"
-   wmctrl -r :ACTIVE: -e 0,$pos_x,$pos_y,$size_x,$(($size_y-$title_height))
-
+   win=`xprop -root _NET_ACTIVE_WINDOW | awk '{print $5}'` 
 fi
+
+# Find out the x position of the winow to figure out which monitor
+# Works only if the extra monitor is attached horizontally, not vertically
+xpos=`xdotool getwindowgeometry $win | grep 'Position' | sed -e 's/.*: \(.*\)\,.*/\1/'`
+
+mon_x=1920              # monitor width
+mon_y=1080              # monitor height
+x_offset=0              # 
+y_offset=30             # example status bar
+titlebar_offset=0       # if there is a titlbar 
+border_width=3          # window border
+gap=10                  # gap between the windows
+
+#----
+grid_width=$((($mon_x-$x_offset-($grid_size_x+1)*$gap)/$grid_size_x ))
+grid_height=$((($mon_y-$y_offset-($grid_size_y+1)*$gap)/$grid_size_y ))
+
+pos_x=$(($win_pos_x*$grid_width+$(($win_pos_x+1))*$gap + $x_offset))
+pos_y=$(($win_pos_y*$grid_height+$(($win_pos_y+1))*$gap + $y_offset))
+
+size_x=$(($win_width*$grid_width+$(($win_width-1))*$gap))
+size_y=$(($win_height*$grid_height+$(($win_height-1))*$gap))
+
+if [ $xpos -ge $mon_x ]; then pos_x=$(($pos_x + $mon_x)); fi
+
+if $verbose; then
+   echo "Window         : $win"
+   echo "Grid size      : $grid_size_x x $grid_size_y (dimension $grid_width x $grid_height)"
+   echo "Win position   : x=$pos_x / y=$pos_y"
+   echo "Win size       : width=$size_x / height=$size_y"
+fi
+
+wmctrl -i -r $win -e 0,$pos_x,$pos_y,$((size_x-2*$border_width)),$((size_y - $titlebar_offset - 2*$border_width))
+
