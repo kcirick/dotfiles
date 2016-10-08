@@ -1,21 +1,28 @@
 urxvt.buffered:         true
-urxvt.background:       black
-urxvt.foreground:       white
+!urxvt.background:       black
+!urxvt.foreground:       white
+urxvt.scrollBar:        none
 urxvt.scrollstyle:      plain
 urxvt.scrollBar_right:  true
-!URxvt*font: xft:Monospace:pixelsize=10
-URxvt*font: xft:Terminus:pixelsize=10
+!urxvt.font:             xft:Terminus:style=Regular:pixelsize=12
+urxvt.font:             xft:Droid Sans Mono:pixelsize=12
+!urxvt.font:             xft:Anonymous Pro:style=Regular:pixelsize=13
 
-!urxvt.transparent:     true
-!urxvt.shading:         50
-!urxvt.tint:            black
+urxvt.iconFile:         /home/rueno/.icons/Paper/32x32/apps/terminal.png
+
+urxvt.modifier: super
 
 ! -- Colours -- !
+! special
+*.foreground:   #CCCCCC
+*.background:   #111111
+*.cursorColor:  #CCCCCC
+
 ! black
 *color0:#555753
 *color8:#202020
 ! red
-*color1:#CC0000
+*color1:#DC3131
 *color9:#EF2929
 ! green
 *color2:#6AAD2B
@@ -24,14 +31,39 @@ URxvt*font: xft:Terminus:pixelsize=10
 *color3:#C4A000
 *color11:#FCE94F
 ! blue
-*color4:#3465A4
+*color4:#325F9B
 *color12:#1793D0
 ! magenta
-*color5:#948696
-*color13:#BCACBB
+*color5:#85678F
+*color13:#B294BB
 ! cyan
 *color6:#06989A
 *color14:#34E2E2
 ! white
-*color7:#EEEEEE
-*color15:#FFFFFF
+*color7:#CCCCCC
+*color15:#DEDEDE
+
+! black
+!*.color0:       #282a2e
+!*.color8:       #373b41
+! red
+!*.color1:       #a54242
+!*.color9:       #cc6666
+! green
+!*.color2:       #8c9440
+!*.color10:      #b5bd68
+! yellow
+!*.color3:       #de935f
+!*.color11:      #f0c674
+! blue
+!*.color4:       #325f9b
+!*.color12:      #5890c0
+! magenta
+!*.color5:       #85678f
+!*.color13:      #b294bb
+! cyan
+!*.color6:       #5e8d87
+!*.color14:      #8abeb7
+! white
+!*.color7:       #707880
+!*.color15:      #c5c8c6
