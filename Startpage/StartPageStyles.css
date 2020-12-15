@@ -1,0 +1,137 @@
+html, body{ 
+   text-align: center;
+   background-color: #111111;
+   /*
+   background-image: url(damask.jpg);
+   background-repeat: repeat;
+   */
+   padding: 0px;
+   margin: 0;
+   height: 100%;
+   font-family: sans-serif;
+   font-size: 18px;
+}
+
+p {
+   color: #D9D9D9;
+   font-size: 17px;
+}
+
+a:link {
+   text-decoration: none;
+   color: #DDDDDD;
+   margin: 2px;
+   font-size: 17px;
+   font-weight: normal;
+}
+
+a:hover {
+   color: #252525;
+   background-color: #DDDDDD;
+   border-radius: 2px;
+   padding: 5px;
+   transition: 0.1s;
+}
+
+a:visited {
+   text-decoration: none;
+   color: #DDDDDD;
+   margin: 2px;
+   font-size: 17px;
+   font-weight: normal;
+}
+
+a:visited:hover {
+   color: #252525;
+   background-color: #DDDDDD;
+   border-radius: 2px;
+   padding: 5px;
+   transition: 0.1s;
+}
+
+ul {
+   list-style: none;
+}
+
+#main {
+   text-align: center;
+   padding: 10px;
+}
+
+.wrapper {
+   margin: auto;
+   width:600px;
+   height: 500px;
+   border: 2px solid #DDDDDD;
+   border-radius: 5px;
+   background: rgba(200,200,200,0.2);
+}
+
+.search {
+   background-color: #DDDDDD;
+   color: #252525;
+   border-style: solid;
+   border-color: #DDDDDD;
+   border-radius: 1px;
+   border-width: 2px;
+   width: 400px;
+   height: 35px;
+   padding: 2px;
+}
+
+.spcr {
+   padding: 20px;
+}
+
+.link_spcr {
+   padding: 5px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+   color:    black;
+   font-size: 15px;
+   padding-left: 5px;
+   text-align: center;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    black;
+   opacity:  1;
+   font-size: 15px;
+   padding-left: 5px;
+   text-align: center;
+}
+
+#links {
+   width: 400px;
+   height: 250px;
+   color: #DDDDDD;
+   padding: 20px;
+   margin: auto;
+   border-radius: 2px;
+   font-weight: bold;
+}
+
+#llinks {
+   width: 200px;
+   height: 250px;
+   color: #DDDDDD;
+   float: left;
+   border-radius: 2px;
+   font-weight: bold;
+   text-align: left;
+}
+
+#rlinks {
+   width: 200px;
+   height: 250px;
+   color: #DDDDDD;
+   float: left;
+   border-radius: 2px;
+   font-weight: bold;
+   text-align: right;
+}
+
+#header:hover {
+   text-decoration: underline;
+   transition: .25s;
+}
