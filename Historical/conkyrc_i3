@@ -1,0 +1,12 @@
+background 			no
+out_to_x				no
+out_to_console		yes
+update_interval	10.0
+total_run_times	0
+
+TEXT
+^i(/home/rueno/Icons/cpu.xbm) ${cpu}% ^fg(\#1793D0)|^fg() \
+^i(/home/rueno/Icons/mem.xbm) ${memperc}% ^fg(\#1793D0)|^fg() \
+^i(/home/rueno/Icons/mail.xbm) ${execi 60 python ~/.local/scripts/gmail.py} ^fg(\#1793D0)|^fg() \
+^i(/home/rueno/Icons/bat.xbm) ${battery BAT1} \
+[^fg(\#1793D0)${time %A, %B %d %H:%M}^fg()]

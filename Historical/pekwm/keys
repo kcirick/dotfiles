@@ -1,0 +1,223 @@
+Global {
+# - - ----------------------------------------------- - -
+	# Moving in frames
+	KeyPress = "Mod4 Tab" { Actions = "NextFrameMRU EndRaise True" }
+	KeyPress = "Mod4 Shift Right" { Actions = "ActivateClientRel 1" }
+	KeyPress = "Mod4 Shift Left" { Actions = "ActivateClientRel -1" }
+	KeyPress = "Mod4 Ctrl Right" { Actions = "MoveClientRel 1" }
+	KeyPress = "Mod4 Ctrl Left" { Actions = "MoveClientRel -1" }
+	KeyPress = "Mod4 Left" { Actions = "FocusDirectional Left" }
+	KeyPress = "Mod4 Right" { Actions = "FocusDirectional Right" }
+	KeyPress = "Mod4 Up" { Actions = "FocusDirectional Up" }
+	KeyPress = "Mod4 Down" { Actions = "FocusDirectional Down" }
+	# Moving in workspaces
+	KeyPress = "Mod1 Left" { Actions = "GotoWorkspace Left" }
+	KeyPress = "Mod1 Right" { Actions = "GotoWorkspace Right" }
+	KeyPress = "Mod1 1" { Actions = "GotoWorkspace 1" }
+	KeyPress = "Mod1 2" { Actions = "GotoWorkspace 2" }
+	KeyPress = "Mod1 3" { Actions = "GotoWorkspace 3" }
+	KeyPress = "Mod1 4" { Actions = "GotoWorkspace 4" }
+	KeyPress = "Mod1 5" { Actions = "GotoWorkspace 5" }
+	KeyPress = "Mod1 6" { Actions = "GotoWorkspace 6" }
+	KeyPress = "Mod1 Shift Right" { Actions = "SendToWorkspace Next; GoToWorkspace Next" }
+	KeyPress = "Mod1 Shift Left" { Actions = "SendToWorkspace Prev; GoToWorkspace Prev" }
+	KeyPress = "Mod1 Shift 1" { Actions = "SendToWorkspace 1" }
+	KeyPress = "Mod1 Shift 2" { Actions = "SendToWorkspace 2" }
+	KeyPress = "Mod1 Shift 3" { Actions = "SendToWorkspace 3" }
+	KeyPress = "Mod1 Shift 4" { Actions = "SendToWorkspace 4" }
+	KeyPress = "Mod1 Shift 5" { Actions = "SendToWorkspace 5" }
+	KeyPress = "Mod1 Shift 6" { Actions = "SendToWorkspace 6" }
+	# Simple window management
+	KeyPress = "Mod4 Return" { Actions = "MoveResize" }
+	KeyPress = "Mod4 S" { Actions = "Toggle Shaded" }
+	KeyPress = "Mod4 I" { Actions = "Toggle Iconified" }
+	KeyPress = "Mod4 F" { Actions = "Toggle FullScreen" }
+	KeyPress = "Mod4 T" { Actions = "Toggle DecorTitlebar" }
+	KeyPress = "Mod4 Q" { Actions = "Close" }
+	# Marking / Tagging
+	KeyPress = "Mod4 Z" { Actions = "Toggle Marked" }
+	#KeyPress = "Mod4 T" { Actions = "Toggle Tagged False" }
+	# Menus
+	KeyPress = "Mod4 Space" { Actions = "ShowMenu Root" }
+	KeyPress = "Mod4 W" { Actions = "ShowMenu Window" }
+	KeyPress = "Mod4 L" { Actions = "ShowMenu Goto" }
+	KeyPress = "Mod4 C" { Actions = "ShowMenu GotoClient" }
+	KeyPress = "Mod4 Shift I" { Actions = "ShowMenu Icon" }
+	KeyPress = "Mod4 X" { Actions = "HideAllMenus" }
+	# Pekwm control
+	KeyPress = "Ctrl Mod1 Delete" { Actions = "Reload" }
+	KeyPress = "Mod4 V" { Actions = "ShowSearchDialog" }
+	KeyPress = "Mod4 H" { Actions = "Toggle HarbourHidden" }
+
+# - - ----------------------------------------------- - -
+# CHAINS. These give you access to just about everything.
+	# Move to Corner
+	Chain = "Mod1 C" {
+		KeyPress = "Z" { Actions = "MoveToEdge BottomLeft" }
+		KeyPress = "X" { Actions = "MoveToEdge BottomCenterEdge" }
+		KeyPress = "Shift X" { Actions = "MoveToEdge BottomEdge" }
+		KeyPress = "C" { Actions = "MoveToEdge BottomRight" }
+		KeyPress = "A" { Actions = "MoveToEdge LeftCenterEdge" }
+		KeyPress = "Shift A" { Actions = "MoveToEdge LeftEdge" }
+		KeyPress = "S" { Actions = "MoveToEdge Center" }
+		KeyPress = "D" { Actions = "MoveToEdge RightCenterEdge" }
+		KeyPress = "Shift D" { Actions = "MoveToEdge RightEdge" }
+		KeyPress = "Q" { Actions = "MoveToEdge TopLeft" }
+		KeyPress = "W" { Actions = "MoveToEdge TopCenterEdge" }
+		KeyPress = "Shift W" { Actions = "MoveToEdge TopEdge" }
+		KeyPress = "E" { Actions = "MoveToEdge TopRight" }
+	}
+   # Tiling
+   Chain = "Mod1 T" {
+      Chain = "Left" {
+         KeyPress = "Left"  { Actions = "Exec ~/.local/bin/moveresize.sh 102" }
+         KeyPress = "Right" { Actions = "Exec ~/.local/bin/moveresize.sh 101" }
+      }
+      Chain = "Right" {
+         KeyPress = "Left"  { Actions = "Exec ~/.local/bin/moveresize.sh 111" }
+         KeyPress = "Right" { Actions = "Exec ~/.local/bin/moveresize.sh 112" }
+      }
+      Chain = "Up" {
+         KeyPress = "Up"    { Actions = "Exec ~/.local/bin/moveresize.sh 122" }
+         KeyPress = "Down"  { Actions = "Exec ~/.local/bin/moveresize.sh 121" }
+      }
+      Chain = "Down" {
+         KeyPress = "Up"  { Actions = "Exec ~/.local/bin/moveresize.sh 131" }
+         KeyPress = "Down"  { Actions = "Exec ~/.local/bin/moveresize.sh 132" }
+      }
+      Chain = "3" {
+         KeyPress = "A" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,0,30,634,1041" }
+         KeyPress = "S" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,640,30,634,1041" }
+         KeyPress = "D" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,1280,30,634,1041" }
+      }
+      KeyPress = "Z" { Actions = "Exec ~/.local/bin/moveresize.sh 1" }
+      KeyPress = "X" { Actions = "Exec ~/.local/bin/moveresize.sh 2" }
+      KeyPress = "C" { Actions = "Exec ~/.local/bin/moveresize.sh 3" }
+      KeyPress = "A" { Actions = "Exec ~/.local/bin/moveresize.sh 4" }
+      KeyPress = "S" { Actions = "Exec ~/.local/bin/moveresize.sh 5" }
+      KeyPress = "D" { Actions = "Exec ~/.local/bin/moveresize.sh 6" }
+      KeyPress = "Q" { Actions = "Exec ~/.local/bin/moveresize.sh 7" }
+      KeyPress = "W" { Actions = "Exec ~/.local/bin/moveresize.sh 8" }
+      KeyPress = "E" { Actions = "Exec ~/.local/bin/moveresize.sh 9" }
+   }
+	# Grouping
+	Chain = "Mod1 G" {
+	#	KeyPress = "T" { Actions = "Toggle Tagged False" }
+	#	KeyPress = "B" { Actions = "Toggle Tagged True" }
+	#	KeyPress = "C" { Actions = "Unset Tagged" }
+		KeyPress = "G" { Actions = "Toggle GlobalGrouping" }
+		KeyPress = "M" { Actions = "Toggle Marked" }
+		KeyPress = "A" { Actions = "AttachMarked" }
+		KeyPress = "D" { Actions = "Detach" }
+		Keypress = "N" { Actions = "AttachClientInNextFrame" }
+		KeyPress = "P" { Actions = "AttachClientInPrevFrame" }
+		Keypress = "Shift N" { Actions = "AttachFrameInNextFrame" }
+		KeyPress = "Shift P" { Actions = "AttachFrameInPrevFrame" }
+	}
+	# Window Actions
+	Chain = "Mod1 A" {
+		Chain = "G" {
+			KeyPress = "G" { Actions = "MaxFill True True" }
+			KeyPress = "V" { Actions = "MaxFill False True" }
+			KeyPress = "H" { Actions = "MaxFill True False" }
+		}
+		Chain = "M" {
+			KeyPress = "M" { Actions = "Toggle Maximized True True" }
+			KeyPress = "V" { Actions = "Toggle Maximized False True" }
+			KeyPress = "H" { Actions = "Toggle Maximized True False" }
+		}
+		Chain = "Q" {
+			KeyPress = "Q" { Actions = "Close" }
+			KeyPress = "F" { Actions = "CloseFrame" }
+			KeyPress = "K" { Actions = "Kill" }
+		}
+		KeyPress = "S" { Actions = "Toggle Shaded" }
+		KeyPress = "A" { Actions = "Toggle Sticky" }
+		KeyPress = "O" { Actions = "Toggle AlwaysOnTop" }
+		KeyPress = "B" { Actions = "Toggle AlwaysBelow" }
+		KeyPress = "I" { Actions = "Set Iconified" }
+		KeyPress = "R" { Actions = "Raise" }
+		KeyPress = "Shift R" { Actions = "Raise True" }
+		KeyPress = "L" { Actions = "Lower" }
+		KeyPress = "Shift L" { Actions = "Lower True" }
+		KeyPress = "X" { Actions = "ActivateOrRaise" }
+		KeyPress = "Return" { Actions = "MoveResize" }
+		KeyPress = "F" { Actions = "Toggle Fullscreen" }
+		KeyPress = "Left" { Actions = "GrowDirection Left" }
+		KeyPress = "Right" { Actions = "GrowDirection Right" }
+		KeyPress = "Up" { Actions = "GrowDirection Up" }
+		KeyPress = "Down" { Actions = "GrowDirection Down" }
+	}
+	# External commands
+	Chain = "Shift Mod1 Return" {
+		KeyPress = "Return" { Actions = "Exec urxvtc" }
+		KeyPress = "R" { Actions = "Exec gmrun" }
+		#KeyPress = "R" { Actions = "ShowCmdDialog" }
+      KeyPress = "T" { Actions = "Exec thunar" }
+	}
+	# Wm actions
+	Chain = "Ctrl Mod1 P" {
+		KeyPress = "Delete" { Actions = "Reload" }
+		KeyPress = "Next" { Actions = "Restart" }
+		KeyPress = "End" { Actions = "Exit" }
+		KeyPress = "D" { Actions = "ShowCmdDialog" }
+		KeyPress = "H" { Actions = "Toggle HarbourHidden" }
+	}
+	# Skipping
+	#Chain = "Ctrl Mod1 S" {
+	#	Keypress = "M" { Actions = "Toggle Skip Menus" }
+	#	Keypress = "F" { Actions = "Toggle Skip FocusToggle" }
+	#	Keypress = "S" { Actions = "Toggle Skip Snap" }
+	#}
+}
+
+# Keys when MoveResize is active
+MoveResize {
+	KeyPress = "Left" { Actions = "MoveHorizontal -10" }
+	KeyPress = "Right" { Actions = "MoveHorizontal 10" }
+	KeyPress = "Up" { Actions = "MoveVertical -10" }
+	KeyPress = "Down" { Actions = "MoveVertical 10" }
+	Keypress = "Shift Left" { Actions = "MoveHorizontal -1" }
+	Keypress = "Shift Right" { Actions = "MoveHorizontal 1" }
+	Keypress = "Shift Up" { Actions = "MoveVertical -1" }
+	Keypress = "Shift Down" { Actions = "MoveVertical 1" }
+	Keypress = "Mod4 Left" { Actions = "ResizeHorizontal -10" }
+	Keypress = "Mod4 Right" { Actions = "ResizeHorizontal 10" }
+	Keypress = "Mod4 Up" { Actions = "ResizeVertical -10" }
+	Keypress = "Mod4 Down" { Actions = "ResizeVertical 10" }
+	Keypress = "Shift Mod4 Left" { Actions = "ResizeHorizontal -1" }
+	Keypress = "Shift Mod4 Right" { Actions = "ResizeHorizontal 1" }
+	Keypress = "Shift Mod4 Up" { Actions = "ResizeVertical -1" }
+	Keypress = "Shift Mod4 Down" { Actions = "ResizeVertical 1" }
+	Keypress = "s" { Actions = "MoveSnap" }
+	Keypress = "Escape" { Actions = "Cancel" }
+	Keypress = "Return" { Actions = "End" }
+}
+
+# Keys for CmdDialog editing
+InputDialog {
+	KeyPress = "Left" { Actions = "CursPrev" }
+	KeyPress = "Right" { Actions = "CursNext" }
+	KeyPress = "Ctrl A" { Actions = "CursBegin" }
+	KeyPress = "Ctrl E" { Actions = "CursEnd" }
+	KeyPress = "BackSpace" { Actions = "Erase;CompleteAbort" }
+	KeyPress = "Ctrl K" { Actions = "ClearFromCursor" }
+	KeyPress = "Ctrl C" { Actions = "Clear" }
+	KeyPress = "Return" { Actions = "Exec" }
+	KeyPress = "Escape" { Actions = "Close" }
+	KeyPress = "Up" { Actions = "HistPrev" }
+	KeyPress = "Down" { Actions = "HistNext" }
+   KeyPress = "Tab" { Actions = "Complete" }
+	KeyPress = "Any Any" { Actions = "Insert" }
+}
+
+# Keys working in menus
+Menu {
+	KeyPress = "Down" { Actions = "NextItem" }
+	KeyPress = "Up" { Actions = "PrevItem" }
+	KeyPress = "Left" { Actions = "LeaveSubmenu" }
+	KeyPress = "Right" { Actions = "EnterSubmenu" }
+	KeyPress = "Return" { Actions = "Select" }
+	KeyPress = "Escape" { Actions = "Close" }
+}
+

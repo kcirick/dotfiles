@@ -1,0 +1,20 @@
+INCLUDE = "$_PEKWM_ETC_PATH/config_system"
+
+Files {
+    Theme = "~/.pekwm/themes/mytheme"
+}
+
+Screen {
+    Workspaces = "6"
+    WorkspacesPerRow = "6"
+    WorkspaceNames = "01;02;03;04;05;06"
+    ShowWorkspaceIndicator = "0"
+
+    Placement {
+        Model = "CenteredOnParent Smart MouseNotUnder"
+    }
+}
+
+Menu {
+   Enter = "Motion"
+}

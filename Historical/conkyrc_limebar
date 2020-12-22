@@ -1,0 +1,11 @@
+background        no
+out_to_x          no
+out_to_console    yes
+update_interval   2.0
+total_run_times   0
+
+TEXT
+CONKY\uf004 ${cpu cpu0}% ${cpu cpu1}% ${cpu cpu2}% ${cpu cpu3}% %{F\#666666}|%{F-} \
+\uf005 ${memperc}% %{F\#666666}|%{F-} \
+\uf1eb ${wireless_essid wlan0} ${wireless_link_qual_perc wlan0}% %{F\#666666}|%{F-} 
+
