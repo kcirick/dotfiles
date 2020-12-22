@@ -1,9 +1,0 @@
-display -window root ~/Pictures/Wallpapers/debian-light.png
-
-setxkbmap -option compose:ralt
-
-tint2 &
-sleep 1 && volumeicon &
-glista &
-
-urxvtd -q -f -o 
