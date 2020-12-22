@@ -75,12 +75,12 @@ ul {
    border-radius: 1px;
    border-width: 2px;
    width: 400px;
-   height: 35px;
+   height: 26px;
    padding: 2px;
 }
 
 .spcr {
-   padding: 20px;
+   padding: 10px;
 }
 
 .link_spcr {
@@ -102,7 +102,7 @@ ul {
 }
 
 #links {
-   width: 400px;
+   width: 510px;
    height: 250px;
    color: #DDDDDD;
    padding: 20px;
@@ -112,7 +112,7 @@ ul {
 }
 
 #llinks {
-   width: 200px;
+   width: 170px;
    height: 250px;
    color: #DDDDDD;
    float: left;
@@ -121,8 +121,18 @@ ul {
    text-align: left;
 }
 
+#clinks {
+   width: 170px;
+   height: 250px;
+   color: #DDDDDD;
+   float: left;
+   border-radius: 2px;
+   font-weight: bold;
+   text-align: center;
+}
+
 #rlinks {
-   width: 200px;
+   width: 170px;
    height: 250px;
    color: #DDDDDD;
    float: left;
