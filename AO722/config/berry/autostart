@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Set decoration geometry
+berryc border_width        1
+berryc inner_border_width  3
+berryc title_height        0
+berryc top_gap             24
+
+# Set decoration colors
+berryc focus_color         111111
+berryc unfocus_color       111111
+berryc inner_focus_color   325F9B
+berryc inner_unfocus_color AAAAAA
+
+# Other options
+berryc smart_place         "false"
+berryc draw_text           "false"
+berryc edge_lock           "true"
+
+berryc name_desktop 0 Eins
+berryc name_desktop 1 Zwei
+berryc name_desktop 2 Drei
+berryc name_desktop 3 Vier
+berryc name_desktop 4 Fünf

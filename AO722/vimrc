@@ -1,0 +1,18 @@
+" backups - I don't want any
+set nobackup
+set nowb
+set noswapfile
+
+" change line number colour
+highlight LineNr ctermfg=DarkGrey
+
+" gui options
+set guioptions-=m
+set guioptions-=T
+
+" show lightline
+set laststatus=2
+
+let g:lightline = {
+   \ 'colorscheme': 'wombat',
+   \ }

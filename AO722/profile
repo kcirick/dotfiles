@@ -1,0 +1,11 @@
+# Begin ~/.bash_profile
+
+if [ -f "$HOME/.bashrc" ]; then
+   source $HOME/.bashrc
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+   pathprepend $HOME/.local/bin
+fi
+
+# End ~/.bash_profile

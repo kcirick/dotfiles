@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# dir can be:
+#    tr - top right
+#    br - bottom right
+#     r - right
+#    tl - top left
+#    bl - bottom left
+#     l - left
+#    t  - top
+#    b  - bottom
+#    c  - center (maximized)
+
+dir=$1
+
+# Edit parameters below:
+sw=1366              # screen width
+sh=768               # screen height
+bh=24                # bar height
+gap=10               # gap
+
+esh=$(($sh-$bh))     # effective screen height
+hsw=$(($sw/2))       # half screen width
+hesh=$(($esh/2))     # half effective screen height
+hgap=$(($gap/2))     # half gap
+
+if [[ $dir == "tr" ]]; then
+   berryc window_move_absolute $(($hsw+$hgap)) $(($bh+$gap))
+   berryc window_resize_absolute $(($hsw-$gap-$hgap)) $(($hesh-$gap-$hgap))
+elif [[ $dir == "br" ]]; then
+   berryc window_move_absolute $(($hsw+$hgap)) $(($bh+$hesh+$hgap))
+   berryc window_resize_absolute $(($hsw-$gap-$hgap)) $(($hesh-$gap-$hgap))
+elif [[ $dir == "r" ]]; then
+   berryc window_move_absolute $(($hsw+$hgap)) $(($bh+$gap))
+   berryc window_resize_absolute $(($hsw-$gap-$hgap)) $(($esh-$gap-$gap))
+elif [[ $dir == "tl" ]]; then
+   berryc window_move_absolute $gap $(($bh+$gap))
+   berryc window_resize_absolute $(($hsw-$gap-$hgap)) $(($hesh-$gap-$hgap))
+elif [[ $dir == "bl" ]]; then
+   berryc window_move_absolute $gap $(($bh+$hesh+$hgap))
+   berryc window_resize_absolute $(($hsw-$gap-$hgap)) $(($hesh-$gap-$hgap))
+elif [[ $dir == "l" ]]; then
+   berryc window_move_absolute $gap $(($bh+$gap))
+   berryc window_resize_absolute $(($hsw-$gap-$hgap)) $(($esh-$gap-$gap))
+elif [[ $dir == "t" ]]; then
+   berryc window_move_absolute $gap $(($bh+$gap))
+   berryc window_resize_absolute $(($sw-$gap-$gap)) $(($hesh-$gap-$hgap))
+elif [[ $dir == "b" ]]; then
+   berryc window_move_absolute $gap $(($bh+$hesh+$hgap))
+   berryc window_resize_absolute $(($sw-$gap-$gap)) $(($hesh-$gap-$hgap))
+elif [[ $dir == "c" ]]; then
+   berryc window_move_absolute $gap $(($bh+$gap))
+   berryc window_resize_absolute $(($sw-$gap-$gap)) $(($esh-$gap-$gap))
+fi
+

@@ -1,0 +1,75 @@
+#
+# WM independent hotkeys
+#
+
+# Terminal emulator
+alt + shift + Return
+   st
+
+alt + shift + r
+   gmrun
+
+alt + shift + w
+   gvimsurfer2
+
+alt + shift + f
+   st -e nnn
+
+# Make sxhkd reload its configuration files:
+super + Escape
+   pkill -USR1 -x sxhkd
+
+#
+# BerryWM hotkeys
+#
+
+ctrl + alt + Escape
+   berryc quit
+
+super + {Left, Right, Up, Down}
+   berryc window_move {-30 0, 30 0, 0 -30, 0 30}
+
+super + shift + {Left, Right, Up, Down}
+   berryc window_resize {-30 0, 30 0, 0 -30, 0 30}
+
+alt + {1-5}
+   berryc switch_workspace {0-4}
+
+super + Tab
+   berryc cycle_focus
+
+super + q
+   berryc window_close
+
+alt + shift + {1-5}
+   berryc send_to_workspace {0-4}
+
+~button1
+   berryc pointer_focus
+
+KP_Left
+   berrytile l
+
+KP_Right
+   berrytile r
+
+KP_Down
+   berrytile b
+
+KP_Up
+   berrytile t
+
+KP_Prior
+   berrytile tr
+
+KP_Next
+   berrytile br
+
+KP_Home
+   berrytile tl
+
+KP_End
+   berrytile bl
+
+KP_Begin
+   berrytile c

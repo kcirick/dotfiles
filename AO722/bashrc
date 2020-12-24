@@ -1,0 +1,13 @@
+# Begin ~/.bashrc
+
+if [ -f "/etc/bashrc" ]; then
+   source /etc/bashrc
+fi
+
+PS1="\[\033[1;30m\033[44m\] \u@\h \[\033[0;32m\] \w \[\033[0m\]> "
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias cmus='cmus --listen 0.0.0.0'
+
+# End ~/.bashrc

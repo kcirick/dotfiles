@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#xsetroot -solid \#222222
+#display -window root ~/Pictures/Wallpapers/diamond_1366x768.png
+display -window root ~/Pictures/Wallpapers/flcl_1366x768.jpg
+
+#limebar &
+polybar topbar &
+
+sxhkd -c ~/.config/berry/sxhkdrc &
+
+exec berry
