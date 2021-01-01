@@ -1,12 +1,6 @@
 #!/bin/bash
 
 # simple screen information script
-# similar to archey and screenfetch without annoying ASCII graphics
-
-#wms=( 2bwm 2wm 9wm aewm afterstep ahwm alopex amiwm antiwm awesome blackbox bspwm catwm clfswm ctwm cwm dminiwm dragonflywm dwm echinus \
-#   euclid-wm evilpoison evilwm fluxbox flwm fvwm-crystal goomwwm hcwm herbstluftwm i3 icewm jwm karmen larswm lwm matwm2 mcwm monsterwm \
-#   musca notion nwm olwm openbox oroborus pekwm ratpoison sapphire sawfish sscrotwm sithwm smallwm snapwm spectrwm stumpwm subtle tfwm tinywm tritium twm \
-#   uwm vtwm w9wm weewm wind windowlab wm2 wmaker wmfs wmii wmx xfwm4 xmonad xoat yeahwm fusionwm )
 
 wms=(berry fusionwm dwm openbox twobwm pekwm)
 
@@ -20,11 +14,12 @@ prp="\e[35m"
 rst="\e[0m"
 
 color-echo() {  # print with colors
-   printf "$cyn%10s : $rst$2\n" $1
+   printf "$red$1$cyn%10s : $rst$3\n" "$2"
 }
 
+
 print-kernel() {
-   color-echo 'Kernel' "$(uname -smr)"
+   color-echo "$1" "Kernel" "$(uname -smr)"
 }
 
 print-uptime() {
@@ -33,22 +28,25 @@ print-uptime() {
    days=$((${up}/86400))       # seconds divided by 86400 is days
    hours=$((${up}/3600%24))    # seconds divided by 3600 mod 24 is hours
    mins=$((${up}/60%60))       # seconds divided by 60 mod 60 is mins
-   color-echo "Uptime" $days'd '$hours'h '$mins'm'
+   
+   color-echo "$1" "Uptime" "$(echo $days'd '$hours'h '$mins'm')"
 }
 
 print-shell() {
-   color-echo 'Shell' $SHELL
+   color-echo "$1" "Shell" $SHELL
 }
 
 print-cpu() {
    cpu=$(grep -m1 -i 'model name' /proc/cpuinfo)
-   color-echo 'CPU' "${cpu#*: }" # everything after colon is processor name
+
+   color-echo "$1" "CPU" "${cpu#*: }" # everything after colon is processor name
 }
 
 print-disk() {
    # field 2 on line 2 is total, field 3 on line 2 is used
    disk=$(df -h / | awk 'NR==2 {total=$2; used=$3; print used" / "total}')
-   color-echo 'Disk' "$disk"
+   
+   color-echo "$1" "Disk" "$disk"
 }
 
 print-mem() {
@@ -61,14 +59,15 @@ print-mem() {
    else # using new format
       mem=$(free -m | awk 'NR==2 {total=$2} NR==2 {used=$3; print used"M / "total"M"}')
    fi
-   color-echo 'Mem' "$mem"
+
+   color-echo "$1" "Mem" "$mem"
 }
 
 print-wm() {
    for wm in ${wms[@]}; do          # pgrep through wmname array
       pid=$(pgrep -x -u $USER $wm) # if found, this wmname has running process
    if [[ "$pid" ]]; then
-      color-echo 'WM' $wm
+      color-echo "$1" "WM" $wm
       break
    fi
 done
@@ -77,14 +76,20 @@ done
 print-distro() {
    [[ -e /etc/os-release ]] && source /etc/os-release
    if [[ -n "$PRETTY_NAME" ]]; then
-      color-echo 'OS' "$PRETTY_NAME"
+      color-echo "$1" "OS" "$PRETTY_NAME"
    else
-      color-echo 'OS' "not found"
+      color-echo "$1" "OS" "not found"
    fi
 }
 
 print-packages() {
-   color-echo 'Packages' $(ls -1 /var/log/packages/ | wc -l)
+   color-echo "$1"  "Packages" "$(ls -1 /var/log/packages/ | wc -l) (pfstool)"
+}
+
+print-resolution() {
+   res=$(xwininfo -root | grep 'geometry' | awk '{print $2}' | cut -d+ -f1)
+   
+   color-echo "$1" "Resolution" $res
 }
 
 print-colors() {
@@ -112,15 +117,14 @@ print-colors() {
 }
 
 echo -e "\n$prp$USER@$HOSTNAME$rst\n"
-print-distro
-print-uptime
-print-kernel
-print-cpu
-print-mem
-print-shell
-print-wm
-print-disk
-print-packages
+print-distro      '             '
+print-kernel      '     _/\_    '
+print-cpu         '   __\  /__  '
+print-mem         '  <_      _> '
+print-shell       '    |/ )\|   '
+print-wm          '      /      '
+print-resolution  '             '
+print-packages    '             '
 echo
-print-colors
+#print-colors
 

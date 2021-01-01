@@ -1,0 +1,45 @@
+/* Tabline adjustments */
+:root {
+   --tabs-border: transparent !important;
+}
+
+.tab-line { 
+   background-color: transparent !important;
+}
+.tab-content[selected="true"] {
+   background-color: #FCFCFC !important;
+   border-bottom: 3px solid #325F9B !important;
+}
+/*.tabbrowser-tabs {
+   border: none !important;
+}*/
+.tabbrowser-tab::before, .tabbrowser-tab::after {
+   border:none !important;
+}
+
+
+/* Remove back button circle, fix size */
+#back-button > .toolbarbutton-icon {
+   transform: scale(.85,.85) !important;
+   animation: none !important;
+   border: none !important;
+   box-shadow: none !important
+}
+
+#back-button:not(:hover), 
+#back-button:not(:hover) > .toolbarbutton-icon {
+   background: none !important;
+}
+#back-button:hover, 
+#back-button:hover > .toolbarbutton-icon {
+   border-radius: 10% !important;
+}
+
+#back-button:hover:not([disabled]) > .toolbarbutton-icon {
+   background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+#back-button:active:not([disabled]) > .toolbarbutton-icon {
+   background-color: var(--toolbarbutton-active-background) !important;
+}
+
