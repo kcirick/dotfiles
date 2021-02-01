@@ -4,10 +4,16 @@ if [ -f "/etc/bashrc" ]; then
    source /etc/bashrc
 fi
 
-PS1="\[\033[1;30m\033[44m\] \u@\h \[\033[0;32m\] \w \[\033[0m\]> "
+NORMAL="\[\e[0m\]"
+GREEN="\[\e[1;32m\]"
+BLUE="\[\e[1;34m\]"
+
+PS1="[ $BLUE\$(date +%H:%M) $NORMAL] $GREEN\w $NORMAL> "
+
+export CMUS_SOCKET=~/.config/cmus/socket
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias cmus='cmus --listen 0.0.0.0'
+#alias cmus='cmus --listen 0.0.0.0'
 
 # End ~/.bashrc

@@ -1,0 +1,65 @@
+#-----------------------#
+#--- SimpleWM Config ---#
+#-----------------------#
+
+#--- Main Configurations -----
+n_tags = 5
+tag_names = One;Two;Three;Four;Five
+
+border_width = 3
+sloppy_focus = true
+
+moveresize_step = 25
+
+#               focus   unfocus urgent  marked  fixed
+#border_colour = #1793D0 #333333 #FF0000 #00FF00 #0000FF
+border_colour = #01608C #001E42 #FF0A0E #00FF00 #9FDBF5
+
+
+#--- Key Bindings -----
+KEY = Mod4+Escape QUIT 0
+KEY = Mod4+k CLIENT kill
+KEY = Mod4+f CLIENT fix
+KEY = Mod4+i CLIENT iconify
+KEY = Mod4+m CLIENT mark
+KEY = Mod4+Tab CLIENT cycle
+#--- Spawns
+KEY = Mod1+Shift+Return SPAWN st
+KEY = Mod1+Shift+r SPAWN gmrun
+KEY = Mod1+Shift+w SPAWN firefox 
+#--- Tiling
+KEY = KP_Left SPAWN wintiler.sh 0x0 2 1 0 0 1 1
+KEY = KP_Right SPAWN wintiler.sh 0x0 2 1 1 0 1 1
+KEY = KP_Down SPAWN wintiler.sh 0x0 1 2 0 1 1 1
+KEY = KP_Up SPAWN wintiler.sh 0x0 1 2 0 0 1 1
+KEY = KP_Prior SPAWN wintiler.sh 0x0 2 2 1 0 1 1
+KEY = KP_Next SPAWN wintiler.sh 0x0 2 2 1 1 1 1
+KEY = KP_Home SPAWN wintiler.sh 0x0 2 2 0 0 1 1
+KEY = KP_End SPAWN wintiler.sh 0x0 2 2 0 1 1 1
+KEY = KP_Begin SPAWN wintiler.sh 0x0 1 1 0 0 1 1
+#--- Tags
+KEY = Mod1+1 TAG select
+KEY = Mod1+2 TAG select
+KEY = Mod1+3 TAG select
+KEY = Mod1+4 TAG select
+KEY = Mod1+5 TAG select
+KEY = Mod1+Shift+1 CLIENT send_to_tag
+KEY = Mod1+Shift+2 CLIENT send_to_tag
+KEY = Mod1+Shift+3 CLIENT send_to_tag
+KEY = Mod1+Shift+4 CLIENT send_to_tag
+KEY = Mod1+Shift+5 CLIENT send_to_tag
+#--- Move/Resize
+KEY = Mod4+Left CLIENT move
+KEY = Mod4+Right CLIENT move
+KEY = Mod4+Up CLIENT move
+KEY = Mod4+Down CLIENT move
+KEY = Mod4+Shift+Left CLIENT resize
+KEY = Mod4+Shift+Right CLIENT resize
+KEY = Mod4+Shift+Up CLIENT resize
+KEY = Mod4+Shift+Down CLIENT resize
+
+#--- Mouse Bindings -----
+MOUSE = Mod4+Button1 CLIENT move
+MOUSE = Mod4+Button3 CLIENT resize
+MOUSE = Button1 ROOT test
+
