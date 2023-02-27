@@ -1,0 +1,305 @@
+;==========================================================
+[colors]
+background = #353535
+background-alt = #666
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #325F9B
+primary-alt = #1793D0
+secondary = #e60053
+alert = #bd2c40
+
+;==========================================================
+[bar/topbar]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 27
+;offset-x = 1%
+;offset-y = 1%
+;radius = 6.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+
+border-size = 0
+;border-color = {$colors.background} 
+border-bottom-size = 1
+border-bottom-color = #000 
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = DejaVu Sans Mono:pixelsize=9
+font-1 = FontAwesome:style=Regular 
+
+modules-left = wspaces wcounter apt_updates apt_updates_ipc 
+modules-center = date
+modules-right = cpu memory wlan alsa
+
+;tray-position = none
+tray-position = right
+;tray-padding = 2
+tray-background = #c8c8c8
+;tray-foreground = ${colors.primary}
+
+;override-redirect = true
+
+enable-ipc = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;==========================================================
+[module/wspaces]
+type = internal/xworkspaces
+pin-workspaces = true
+enable-click = true
+enable-scroll = false
+
+format = <label-state>
+
+label-active = %name%
+label-active-foreground = ${colors.foreground}
+label-active-background = ${colors.background}
+label-active-underline = ${colors.primary}
+label-active-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-background = ${colors.background}
+label-empty-padding = 1
+
+label-occupied = %name%
+label-occupied-foreground = ${colors.foreground}
+label-occupied-background = ${colors.background}
+label-occupied-padding = 1
+
+; Separator in between workspaces
+; label-separator = |
+
+;==========================================================
+[module/wcounter]
+type = custom/script
+exec = wincounter
+tail = true
+interval = 0
+
+format-padding = 2
+format-background = ${colors.background-alt}
+
+;==========================================================
+[module/apt_updates_ipc]
+type = custom/ipc
+
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+
+hook-0 = apt-updates.sh
+
+click-left = urxvtc -e sh -c "sudo apt update && polybar-msg hook apt_updates_ipc 1"
+click-right = polybar-msg hook apt_updates_ipc 1
+
+[module/apt_updates]
+type = custom/script
+exec = polybar-msg hook apt_updates_ipc 1 
+interval = 3600 
+
+label = 
+
+;==========================================================
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+;==========================================================
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+;bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 1
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 1
+bar-empty-foreground = ${colors.foreground-alt}
+
+;==========================================================
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+;==========================================================
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+;format-prefix = "CPU "
+format-prefix = "  "
+format-prefix-font = 2
+format-prefix-foreground = ${colors.primary} 
+;format-underline = #f90000
+label = %percentage-cores%
+
+;==========================================================
+[module/memory]
+type = internal/memory
+interval = 2
+
+;format-prefix = "MEM "
+format-prefix = "  "
+format-prefix-font = 2
+format-prefix-foreground = ${colors.primary}
+;format-underline = #4bffdc
+label = %percentage_used%%
+
+;==========================================================
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 2
+
+format-connected = <label-connected>
+;format-connected-prefix= "WLAN "
+format-connected-prefix= "  "
+format-connected-prefix-foreground = ${colors.primary}
+;format-connected-underline = #9f78e1
+label-connected = "%essid% [%{F#325F9B}%{F-} %downspeed% %upspeed%]" 
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+;ramp-signal-foreground = ${colors.foreground-alt}
+
+;==========================================================
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 2
+
+format-connected-underline = #55aa55
+format-connected-prefix = "ETH "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+;==========================================================
+[module/alsa]
+type = internal/alsa
+
+format-volume = "<label-volume> <bar-volume>  "
+label-volume = " "
+label-volume-foreground = ${colors.primary} 
+
+;format-muted-prefix = "VOL "
+format-muted-prefix = " "
+format-muted-prefix-foreground = ${colors.primary} 
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = " -muted-  "
+
+bar-volume-width = 10
+bar-volume-foreground = ${colors.foreground}
+;bar-volume-foreground-0 = #55aa55
+;bar-volume-foreground-1 = #55aa55
+;bar-volume-foreground-2 = #55aa55
+;bar-volume-foreground-3 = #55aa55
+;bar-volume-foreground-4 = #ffcc55
+;bar-volume-foreground-5 = #ffcc55
+;bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+;bar-volume-indicator-font = 2
+bar-volume-fill = ━
+;bar-volume-fill-font = 1
+bar-volume-empty = ━
+;bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+;==========================================================
+[module/date]
+type = custom/script
+exec = date '+%a %b %d, %H:%M'
+interval = 10
+
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+format-padding = 2
+;format-background = ${colors.background-alt}
+;format-background = #c8c8c8
+;format-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary} 
+
+click-left = gsimplecal
+
+;==========================================================
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close = cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = suspend
+menu-0-0-exec = systemctl suspend 
+menu-0-1 = reboot
+menu-0-1-exec = systemctl reboot
+menu-0-2 = power off
+menu-0-2-exec = systemctl poweroff 
+
+;menu-1-0 = cancel
+;menu-1-0-exec = menu-open-0
+;menu-1-1 = reboot
+;menu-1-1-exec = systemctl reboot
+
+;menu-2-0 = cancel
+;menu-2-0-exec = menu-open-0
+;menu-2-1 = suspend 
+;menu-2-1-exec = systemctl suspend
+
+;menu-3-0 = power off
+;menu-3-0-exec = systemctl poweroff
+;menu-3-1 = cancel
+;menu-3-1-exec = menu-open-0
+
+;==========================================================
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+;==========================================================
+[global/wm]
+margin-top = 4
+margin-bottom = 4
+
+; vim:ft=dosini

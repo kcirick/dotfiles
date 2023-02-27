@@ -1,0 +1,14 @@
+if [ -f "/etc/bashrc" ]; then
+	source /etc/bashrc
+fi
+
+NORMAL="\[\e[0m\]"
+GREEN="\[\e[1;32m\]"
+BLUE="\[\e[1;34m\]"
+
+PS1="[ $BLUE\$(date +%H:%M) $NORMAL] $GREEN\w $NORMAL> "
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+export PATH=~/.local/bin:$PATH

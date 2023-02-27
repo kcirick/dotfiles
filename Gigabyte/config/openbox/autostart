@@ -1,0 +1,13 @@
+display -window root ~/Pictures/Wallpapers/minimal_mountains1080.png
+
+setxkbmap -option compose:ralt
+
+ibus-daemon &
+nm-applet &
+blueman-applet &
+polybar topbar &
+
+lxpolkit &
+
+urxvtd -q -f -o
+

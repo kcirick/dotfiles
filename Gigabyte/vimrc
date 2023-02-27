@@ -1,0 +1,33 @@
+set nu
+set ruler
+
+set nobackup
+set nowb
+set noswapfile
+
+syntax on
+
+" change line number colour
+highlight LineNr ctermfg=DarkGrey
+
+set autoindent
+set smartindent
+
+set tabstop=3
+set shiftwidth=3
+set expandtab
+set wrap
+
+set formatoptions-=t
+
+set guioptions-=m
+set guioptions-=T
+
+set showtabline=2
+
+" show lightline
+set laststatus=2
+
+let g:lightline = {
+   \ 'colorscheme': 'wombat',
+   \ }

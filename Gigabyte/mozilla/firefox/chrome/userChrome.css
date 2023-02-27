@@ -1,0 +1,38 @@
+/* Tabline adjustments */
+:root {
+   --tabs-border: transparent !important;
+}
+
+.tab-line { 
+   background-color: transparent !important;
+}
+.tab-content[selected="true"] {
+   background-color: #FCFCFC !important;
+   border-bottom: 3px solid #325F9B !important;
+}
+/*.tabbrowser-tabs {
+   border: none !important;
+}*/
+.tabbrowser-tab::before, .tabbrowser-tab::after {
+   border:none !important;
+}
+
+/* adjust the tab height */
+#TabsToolbar, #tabbrowser-tabs {
+   --tab-min-height: 29px !important;
+}
+
+#tabbrowser-tabs {
+   --user-tab-rounding: 4px;
+}
+
+/* Tighten up drop-down/context/popup menu spacing */
+
+menupopup:not(.in-menulist) > menuitem, 
+menupopup:not(.in-menulist) > menu {
+  padding-block: 4px !important; /* reduce to 3px, 2px, 1px or 0px as needed */ 
+  min-height: unset !important; /* v92.0 - for padding below 4px */
+}
+:root {
+  --arrowpanel-menuitem-padding: 4px 8px !important;
+}

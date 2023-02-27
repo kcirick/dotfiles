@@ -1,0 +1,35 @@
+#!/bin/bash
+
+tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
+
+{
+   xprop -spy -root _NET_CLIENT_LIST _NET_CURRENT_DESKTOP
+
+} | {
+
+   while read -r line; do
+
+      case $line in 
+         _NET_CLIENT_LIST*)
+            clist=${line}
+            ;;
+         _NET_CURRENT_DESKTOP*)
+            cur=$(echo ${line} | awk '{print $3}')
+            ;;   
+      esac
+
+      allwinid=$(echo $clist | cut -d' ' -f5- | sed 's/,//g')
+
+      for w in `seq 0 $((tot-1))`; do
+         counter[$w]=0
+      done
+
+      for win in ${allwinid[@]}; do
+         wsid=`xprop -id $win _NET_WM_DESKTOP | awk '{print $3}'`
+         counter[$wsid]=$(( ${counter[$wsid]}+1 ))
+      done
+   
+      echo ${counter[$cur]}
+   done
+
+}
