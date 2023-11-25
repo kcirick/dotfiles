@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+
+<!--
+  This is a very simple config file with many options missing. For a complete
+  set of options with comments, see docs/rc.xml.all
+-->
+
+<labwc_config>
+
+  <core>
+    <gap>10</gap>
+  </core>
+
+  <focus>
+     <focusNew>yes</focusNew>
+     <focusLast>yes</focusLast>
+     <followMouse>yes</followMouse>
+     <underMouse>no</underMouse>
+     <focusDelay>10</focusDelay>
+     <raiseOnFocus>no</raiseOnFocus>
+  </focus>
+
+  <regions>
+     <region name="fullscreen" x="0%" y="0%" width="100%" height="100%" />
+     <region name="half-left" x="0%" y="0%" width="50%" height="100%" />
+     <region name="half-right" x="50%" y="0%" width="50%" height="100%" />
+     <region name="half-top" x="0%" y="0%" width="100%" height="50%" />
+     <region name="half-bottom" x="0%" y="50%" width="100%" height="50%" />
+     <region name="top-left" x="0%" y="0%" width="50%" height="50%" />
+     <region name="bottom-left" x="0%" y="50%" width="50%" height="50%" />
+     <region name="top-right" x="50%" y="0%" width="50%" height="50%" />
+     <region name="bottom-right" x="50%" y="50%" width="50%" height="50%" />
+  </regions>
+
+  <theme>
+    <name>MyTheme</name>
+    <cornerRadius>4</cornerRadius>
+    <font name="sans" size="10" />
+ </theme>
+
+ <applications>
+    <application class="*">
+       <decor>no</decor>
+    </application>
+ </applications>
+
+  <desktops>
+     <number>5</number>
+     <firstdesk>1</firstdesk>
+     <names>
+        <name>One</name>
+        <name>Two</name>
+        <name>Three</name>
+        <name>Four</name>
+        <name>Five</name>
+     </names>
+     <popupTime>0</popupTime>
+  </desktops>
+
+  <keyboard>
+    <default />
+    <!-- Use a different terminal emulator -->
+    <keybind key="A-S-Return">
+      <action name="Execute" command="st" />
+    </keybind>
+    <keybind key="A-S-r">
+      <action name="Execute" command="gmrun" />
+    </keybind>
+
+    <!-- Keybindings for windows -->
+    <keybind key="W-S-k">
+       <action name="Close"/>
+    </keybind>
+    <keybind key="W-S-i">
+       <action name="Iconify"/>
+    </keybind>
+    <keybind key="W-S-space">
+       <action name="ShowMenu">
+          <menu>client-menu</menu>
+       </action>
+    </keybind>
+    <!--
+      Remove a previously defined keybind
+      A shorter alternative is <keybind key="W-F4" />
+    -->
+    <keybind key="A-1">
+       <action name="GoToDesktop"><to>1</to></action>
+    </keybind>
+    <keybind key="A-2">
+       <action name="GoToDesktop"><to>2</to></action>
+    </keybind>
+    <keybind key="A-3">
+       <action name="GoToDesktop"><to>3</to></action>
+    </keybind>
+    <keybind key="A-4">
+       <action name="GoToDesktop"><to>4</to></action>
+    </keybind>
+    <keybind key="A-5">
+       <action name="GoToDesktop"><to>5</to></action>
+    </keybind>
+    <keybind key="A-S-1">
+       <action name="SendToDesktop"><to>1</to></action>
+    </keybind>
+    <keybind key="A-S-2">
+       <action name="SendToDesktop"><to>2</to></action>
+    </keybind>
+    <keybind key="A-S-3">
+       <action name="SendToDesktop"><to>3</to></action>
+    </keybind>
+    <keybind key="A-S-4">
+       <action name="SendToDesktop"><to>4</to></action>
+    </keybind>
+    <keybind key="A-S-5">
+       <action name="SendToDesktop"><to>5</to></action>
+    </keybind>
+   
+    <keybind key="A-Tab">
+       <action name="NextWindow">
+          <finalactions>
+             <action name="Focus"/>
+             <action name="Raise"/>
+             <action name="Unshade"/>
+          </finalactions>
+       </action>
+    </keybind>
+
+    <!-- Window tiling -->
+    <keybind key="W-m">
+       <action name="SnapToRegion" region="bottom-left"/>
+    </keybind>
+    <keybind key="W-j">
+       <action name="SnapToRegion" region="half-left"/>
+    </keybind>
+    <keybind key="W-k">
+       <action name="SnapToRegion" region="fullscreen"/>
+    </keybind>
+    <keybind key="W-l">
+       <action name="SnapToRegion" region="half-right"/>
+    </keybind>
+    <keybind key="W-u">
+       <action name="SnapToRegion" region="top-left"/>
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+
+    <!-- Show a custom menu on desktop right click -->
+    <context name="Root">
+      <mousebind button="Left" action="Press">
+        <action name="None" />
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu" menu="root-menu" />
+      </mousebind>
+    </context>
+
+    <context name="Frame">
+       <mousebind button="W-Left" action="Drag">
+          <action name="Move"/>
+       </mousebind>
+       <mousebind button="W-Right" action="Drag">
+          <action name="Resize"/>
+       </mousebind>
+    </context>
+  </mouse>
+
+</labwc_config>
