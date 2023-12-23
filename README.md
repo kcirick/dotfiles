@@ -41,6 +41,9 @@ config 1:
 <img src='https://i.redd.it/ruy0f3z9snfa1.png' width='400' />
 
 config 2:
+[Reddit post](https://www.reddit.com/r/unixporn/comments/18pauj9/swc_making_the_transition_from_x11_to_wayland/)
+
+<img src='https://i.redd.it/mqvdzk97038c1.jpeg' width='400' />
 
 
 ## Historical
