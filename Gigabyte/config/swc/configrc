@@ -22,33 +22,39 @@ border_colour_outline = #FFFFFF
 
 #--- Autostarts (in sequence) -----
 #AUTOSTART = wbg ~/Pictures/Wallpapers/aurora5-2.jpg 
-#AUTOSTART = waybar
+#AUTOSTART = dunst >/dev/null 2>&1
+AUTOSTART = waybar
+AUTOSTART = swayidle -w timeout 900 'wlopm --off \*' resume 'wlopm --on \*'
 #AUTOSTART = kitty
 
 #--- Key Bindings -----
 KEY = A+S+Q QUIT 0
-KEY = A+Return SPAWN kitty
-KEY = A+r SPAWN gmrun
-KEY = A+w SPAWN firefox
+KEY = A+S+L SPAWN swaylock -f -c 000000
 KEY = A+c CLIENT cycle
 KEY = A+f CLIENT toggle_fixed
 KEY = A+k CLIENT kill
-
-KEY = W+1 TAG select
-KEY = W+2 TAG select
-KEY = W+3 TAG select
-KEY = W+4 TAG select
-KEY = W+5 TAG select
-KEY = W+C+1 TAG toggle
-KEY = W+C+2 TAG toggle
-KEY = W+C+3 TAG toggle
-KEY = W+C+4 TAG toggle
-KEY = W+C+5 TAG toggle
-KEY = W+A+1 CLIENT send_to_tag
-KEY = W+A+2 CLIENT send_to_tag
-KEY = W+A+3 CLIENT send_to_tag
-KEY = W+A+4 CLIENT send_to_tag
-KEY = W+A+5 CLIENT send_to_tag
+KEY = A+m CLIENT maximize 
+KEY = A+h CLIENT toggle_visible
+#--- Spawns
+KEY = A+Return SPAWN kitty
+KEY = A+r SPAWN gmrun
+KEY = A+w SPAWN firefox
+#--- Tags
+KEY = A+1 TAG select
+KEY = A+2 TAG select
+KEY = A+3 TAG select
+KEY = A+4 TAG select
+KEY = A+5 TAG select
+KEY = A+C+1 TAG toggle
+KEY = A+C+2 TAG toggle
+KEY = A+C+3 TAG toggle
+KEY = A+C+4 TAG toggle
+KEY = A+C+5 TAG toggle
+KEY = A+W+1 CLIENT send_to_tag
+KEY = A+W+2 CLIENT send_to_tag
+KEY = A+W+3 CLIENT send_to_tag
+KEY = A+W+4 CLIENT send_to_tag
+KEY = A+W+5 CLIENT send_to_tag
 #--- Move/Resize
 KEY = A+Left CLIENT move
 KEY = A+Right CLIENT move

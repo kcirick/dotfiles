@@ -9,7 +9,7 @@
    //"modules-left": ["wlr/workspaces"],
    // "modules-left": ["custom/ws1", "custom/ws2", "custom/ws3", "custom/ws4", "custom/ws5"],
    "modules-left": ["dwl/tags"],
-   "modules-center": ["clock", "custom/weather"],
+   "modules-center": ["clock", "custom/weather2"],
    // "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
    "modules-right": ["cpu", "memory", "pulseaudio", "network", "bluetooth", "tray"],
 
@@ -59,7 +59,7 @@
       "calendar": {
          "mode" : "month",
          "format": {
-            "months":     "<span color='#ffead3'><b>{}</b></span>",
+            "months":     "<span color='#ffead3'>{}</span>",
             "days":       "<span color='#eeeeee'><b>{}</b></span>",
             "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
             "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
@@ -72,10 +72,18 @@
       "return-type": "json",
       "format": " {}",
       "tooltip": true,
-      "interval": 3600
+      "interval": 1800
+   },
+   "custom/weather2": {
+      "exec": "wb-weather2.py",
+      "return-type": "json",
+      "format": " {}",
+      "tooltip": true,
+      "interval": 900
    },
 
    "cpu": {
+      "interval": 5,
       "format": " {usage}%",
       "tooltip": true, 
       "tooltip-format": "{usage 0}% {usage 1}% {usage 2}% {usage 3}%"
@@ -93,11 +101,12 @@
       "format-alt": "{ifname}: {ipaddr}/{cidr}"
    },
    "pulseaudio": {
-      // "scroll-step": 1, // %, can be a float
-      "format": "{volume}% {icon} {format_source}",
-      "format-bluetooth": "{volume}% {icon} {format_source}",
-      "format-bluetooth-muted": " {icon} {format_source}",
-      "format-muted": " {format_source}",
+      "scroll-step": 5, // %, can be a float
+      // "format": "{volume}% {icon} {format_source}",
+      "format": "{volume}% {icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-bluetooth-muted": " {icon} ",
+      "format-muted": " ",
       "format-source": "{volume}% ",
       "format-source-muted": "",
       "format-icons": {
