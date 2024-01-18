@@ -2,13 +2,18 @@ if [ -f "/etc/bashrc" ]; then
 	source /etc/bashrc
 fi
 
-NORMAL="\[\e[0m\]"
-GREEN="\[\e[1;32m\]"
-BLUE="\[\e[1;34m\]"
+NORMAL="\\e[0m\]"
+RED="\[\[31m\]"
+GREEN="\[\e[32m\]"
+YELLOW="\[\e[33m\]"
+YELLOWBG="\[\e[43m\]"
+BLUE="\[\e[34m\]"
+PURPLE="\\e[35m\]"
+PURPLEBG='\e[45m'
 
-PS1="[ $BLUE\$(date +%H:%M) $NORMAL] $GREEN\w $NORMAL> "
+#PS1="[ $BLUE\$(date +%H:%M) $NORMAL] $GREEN\w $NORMAL> "
+PS1=$'\[\e[40;39m\] $(date +%H:%M) \[\e[44;30m\]\uE0B0\[\e[90m\] \\u \[\e[0;34m\]\uE0B0\[\e[32m\] \\w \[\e[0m\]> '
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-export PATH=~/.local/bin:$PATH

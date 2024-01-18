@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import subprocess
 from pyquery import PyQuery  # install using `pip install pyquery`
@@ -23,7 +23,12 @@ weather_icons = {
     "Partly Cloudy": "\uf6c4",      "Partly Cloudy Night": "\uf6c3",
     "Mostly Cloudy": "\uf6c4",      "Mostly Cloudy Night": "\uf6c3",
     "Cloudy": "\uf0c2",
+    "Wind": "\uf72e",
+    "Scattered Showers": "\uf743",  "Scattered Showers Night": "\uf73c",
     "Rain": "\uf740",
+    "Rain and Hail": "\uf7ad\uf740", 
+    "Rain and Snow": "\uf2dc\uf740",
+    "Scattered Snow": "\uf2dc",     "Scattered Snow Night": "\uf2dc",
     "Snow": "\uf2dc",
     "default": "?",
 }

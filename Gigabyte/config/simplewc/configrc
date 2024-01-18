@@ -1,0 +1,83 @@
+# SWC Config
+
+n_tags = 5
+
+border_width = 2
+tile_gap_width = 10
+sloppy_focus = true
+moveresize_step = 15
+
+background_colour = #222222
+
+#border_colour_focus = #1793D0
+#border_colour_focus = #033250
+#border_colour_focus = #5294e2
+#border_colour_unfocus = #333333
+#border_colour_unfocus = #535F6F
+#border_colour_focus = #B61D25
+border_colour_focus = #ACB3B1
+border_colour_unfocus = #3C4541
+border_colour_urgent = #FF0000 
+border_colour_marked = #00FF00 
+#border_colour_fixed = #0000FF
+border_colour_fixed = #6AAD2B
+border_colour_outline = #ACBEB1
+
+#--- Command for locking -----
+lock_cmd = swaylock -c 000000
+
+#--- Autostarts (in sequence) -----
+autostart = ~/.config/simplewc/autostart.sh
+
+#--- Key Bindings -----
+KEY = A+S+q QUIT 0
+KEY = A+S+l LOCK lock_cmd 
+#--- Spawns
+KEY = A+S+Return SPAWN foot 
+KEY = A+S+r SPAWN fuzzel
+KEY = A+S+w SPAWN firefox
+KEY = XF86AudioLowerVolume SPAWN pactl set-sink-volume @DEFAULT_SINK@ -5%
+KEY = XF86AudioRaiseVolume SPAWN pactl set-sink-volume @DEFAULT_SINK@ +5%
+KEY = XF86AudioMute SPAWN pactl set-sink-mute @DEFAULT_SINK@ toggle
+#--- Client actions
+KEY = A+Tab CLIENT cycle
+KEY = A+f CLIENT toggle_fixed
+KEY = A+k CLIENT kill
+KEY = A+m CLIENT maximize 
+KEY = A+h CLIENT toggle_visible
+#--- Tags
+KEY = A+1 TAG select
+KEY = A+2 TAG select
+KEY = A+3 TAG select
+KEY = A+4 TAG select
+KEY = A+5 TAG select
+KEY = A+C+1 TAG toggle
+KEY = A+C+2 TAG toggle
+KEY = A+C+3 TAG toggle
+KEY = A+C+4 TAG toggle
+KEY = A+C+5 TAG toggle
+KEY = A+S+1 CLIENT send_to_tag
+KEY = A+S+2 CLIENT send_to_tag
+KEY = A+S+3 CLIENT send_to_tag
+KEY = A+S+4 CLIENT send_to_tag
+KEY = A+S+5 CLIENT send_to_tag
+#--- Move/Resize
+KEY = W+Left CLIENT move
+KEY = W+Right CLIENT move
+KEY = W+Up CLIENT move
+KEY = W+Down CLIENT move
+KEY = W+S+Left CLIENT resize
+KEY = W+S+Right CLIENT resize
+KEY = W+S+Up CLIENT resize
+KEY = W+S+Down CLIENT resize
+#--- Tiling (simple)
+# auto-tile
+KEY = A+t TAG tile
+# manual tile
+KEY = A+bracketleft CLIENT tile_left
+KEY = A+bracketright CLIENT tile_right
+
+#--- Mouse Bindings -----
+MOUSE = W+Button_Left CLIENT move
+MOUSE = W+Button_Right CLIENT resize
+MOUSE = Button_Left ROOT test

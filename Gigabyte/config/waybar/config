@@ -1,22 +1,31 @@
 {
    "layer": "top", // Waybar at top layer
    // "position": "bottom", // Waybar position (top|bottom|left|right)
-   "height": 30, // Waybar height (to be removed for auto height)
+   "height": 32, // Waybar height (to be removed for auto height)
    // "width": 1280, // Waybar width
    "spacing": 0, // Gaps between modules (4px)
    
    // Choose the order of the modules
    //"modules-left": ["wlr/workspaces"],
    // "modules-left": ["custom/ws1", "custom/ws2", "custom/ws3", "custom/ws4", "custom/ws5"],
-   "modules-left": ["dwl/tags"],
-   "modules-center": ["clock", "custom/weather2"],
-   // "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
-   "modules-right": ["cpu", "memory", "pulseaudio", "network", "bluetooth", "tray"],
+   "modules-left": ["custom/logo", "custom/separator", "dwl/tags"],
+   "modules-center": ["clock", "custom/separator", "custom/weather2"],
+   "modules-right": ["cpu", "memory", "pulseaudio", "network", "bluetooth", "custom/apt", "idle_inhibitor", "tray", "custom/separator", "group/group-power"],
 
    // Modules configuration
+   "custom/logo": {
+      "format": " \ue60b ",
+      "interval": "once",
+      "tooltip": false
+   },
    "dwl/tags": {
       "num-tags": 5,
-      "tag-labels": [ "Eins", "Zwei", "Drei", "Vier", "Fünf" ]
+      "tag-labels": [ " 1 ", " 2 ", " 3 ", " 4 ", " 5 " ]
+   },
+   "custom/separator": {
+      "format": "::",
+      "interval": "once",
+      "tooltip": false
    },
    "custom/ws1": {
       "format": "{icon}",
@@ -49,30 +58,31 @@
          "deactivated": ""
       }
    },
+   "custom/apt": {
+      "format": " {}",
+      "return-type": "json",
+      "exec" : "wb-apt-updates.sh",
+      "interval" : 3600,
+      "on-click": "exec foot -e sh -c 'sudo apt update'; pkill -SIGRTMIN+6 waybar",
+      "signal": 6
+   },
    "tray": {
       "spacing": 10
    },
    "clock": {
       "interval":60,
       "format": " {:%a %b %d, %H:%M} ",
-      "tooltip-format": "<tt>{calendar}</tt>",
+      "tooltip-format": "<tt><big>{calendar}</big></tt>",
       "calendar": {
          "mode" : "month",
          "format": {
             "months":     "<span color='#ffead3'>{}</span>",
-            "days":       "<span color='#eeeeee'><b>{}</b></span>",
+            "days":       "<span color='#eeeeee'>{}</span>",
             "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
             "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
             "today":      "<span color='#ff6699'><b>{}</b></span>"
          }
       }
-   },
-   "custom/weather": {
-      "exec": "wb-weather.py",
-      "return-type": "json",
-      "format": " {}",
-      "tooltip": true,
-      "interval": 1800
    },
    "custom/weather2": {
       "exec": "wb-weather2.py",
@@ -84,18 +94,20 @@
 
    "cpu": {
       "interval": 5,
-      "format": " {usage}%",
+      "format": "\uf2db {usage}%",
       "tooltip": true, 
-      "tooltip-format": "{usage 0}% {usage 1}% {usage 2}% {usage 3}%"
+      "tooltip-format": "{usage 0}% {usage 1}% {usage 2}% {usage 3}%",
+      "on-click": "exec foot -e sh -c 'htop'"
    },
    "memory": {
-      "format": " {}%"
+      "format": "\uf538 {}%"
    },
    "network": {
       // "interface": "wlp2*", // (Optional) To force the use of this interface
-      "format-wifi": " {essid} ({signalStrength}%)" ,
+      "format-wifi": " {essid}" ,
       "format-ethernet": "{ipaddr}/{cidr} ",
-      "tooltip-format": "{ifname} via {gwaddr} ",
+      //"tooltip-format": "{ifname} via {gwaddr} ",
+      "tooltip-format": "{ifname} - ({signalStrength}%)\nIP - {ipaddr}\nU {bandwidthUpBytes} :: D {bandwidthDownBytes}",
       "format-linked": "{ifname} (No IP) ",
       "format-disconnected": "Disconnected ⚠",
       "format-alt": "{ifname}: {ipaddr}/{cidr}"
@@ -103,10 +115,10 @@
    "pulseaudio": {
       "scroll-step": 5, // %, can be a float
       // "format": "{volume}% {icon} {format_source}",
-      "format": "{volume}% {icon}",
+      "format": "{icon} {volume}%",
       "format-bluetooth": "{volume}% {icon}",
       "format-bluetooth-muted": " {icon} ",
-      "format-muted": " ",
+      "format-muted": " -muted-",
       "format-source": "{volume}% ",
       "format-source-muted": "",
       "format-icons": {
@@ -117,15 +129,47 @@
          "default": ["", "", ""]
       },
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-      "on-click-right": "kitty pulsemixer"
+      "on-click-right": "foot pulsemixer"
+   },
+   "pulseaudio/slider": {
+      "min": 0,
+      "max": 100,
+      "orientation": "horizontal"
    },
    "bluetooth": {
       // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
-      "format": " {status}  ",
+      "format": " {status}",
       "format-disabled": "", // an empty format will hide the module
-      "format-connected": " {num_connections}  ",
+      "format-connected": " {num_connections}",
       "tooltip-format": "{controller_alias}\t{controller_address}",
       "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
       "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+   },
+   "group/group-power": {
+      "orientation": "horizontal",
+      "drawer": {
+         "children-class": "not-power",
+         "transition-left-to-right": "false"
+      },
+      "modules": [ "custom/power", "custom/logout", "custom/reboot", "custom/lock" ]
+   },
+   "custom/power": {
+      "format": "\uf011",
+      "tooltip": false 
+   },
+   "custom/logout": {
+      "format": "\uf08b",
+      "tooltip": false,
+      "on-click": "simplewc-msg --action quit"
+   },
+   "custom/reboot": {
+      "format": "\uf01e",
+      "tooltip": false,
+      "on-click": "systemctl reboot"
+   },
+   "custom/lock": {
+      "format": "\uf023",
+      "tooltip": false,
+      "on-click": "simplewc-msg --action lock"
    }
 }

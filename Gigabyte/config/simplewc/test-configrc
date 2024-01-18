@@ -1,0 +1,66 @@
+# SWC Config (Testing)
+
+n_tags = 3
+
+border_width = 4
+tile_gap_width = 10
+sloppy_focus = true
+moveresize_step = 15
+
+background_colour = #000000
+
+border_colour_focus = #033250
+border_colour_unfocus = #535F6F
+border_colour_urgent = #FF0000 
+border_colour_marked = #00FF00 
+border_colour_fixed = #6AAD2B
+border_colour_outline = #FFFFFF
+
+lock_cmd = notify-send "lock_cmd"
+
+#--- Autostart file (make sure it's executable) ----- 
+autostart = ~/.config/simplewc/test-autostart.sh
+
+#--- Key Bindings -----
+KEY = A+Escape QUIT 0
+KEY = A+l LOCK lock_cmd
+#--- Spawns
+KEY = A+S+k SPAWN kitty
+KEY = A+S+r SPAWN gmrun
+#KEY = A+w SPAWN firefox
+#--- Client actions
+KEY = W+c CLIENT cycle
+#KEY = A+f CLIENT toggle_fixed
+KEY = W+k CLIENT kill
+#KEY = A+m CLIENT maximize 
+KEY = W+h CLIENT toggle_visible
+#--- Tags
+KEY = W+1 TAG select
+KEY = W+2 TAG select
+KEY = W+3 TAG select
+KEY = W+C+1 TAG toggle
+KEY = W+C+2 TAG toggle
+KEY = W+C+3 TAG toggle
+KEY = W+S+1 CLIENT send_to_tag
+KEY = W+S+2 CLIENT send_to_tag
+KEY = W+S+3 CLIENT send_to_tag
+#--- Move/Resize
+KEY = A+Left CLIENT move
+KEY = A+Right CLIENT move
+KEY = A+Up CLIENT move
+KEY = A+Down CLIENT move
+KEY = A+S+Left CLIENT resize
+KEY = A+S+Right CLIENT resize
+KEY = A+S+Up CLIENT resize
+KEY = A+S+Down CLIENT resize
+#--- Tiling (simple)
+# auto-tile
+KEY = A+S+t TAG tile
+# manual tile
+KEY = A+comma CLIENT tile_left
+KEY = A+period CLIENT tile_right
+
+#--- Mouse Bindings -----
+MOUSE = A+Button_Left CLIENT move
+MOUSE = A+Button_Right CLIENT resize
+#MOUSE = Button_Left ROOT test

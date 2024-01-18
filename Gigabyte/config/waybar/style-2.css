@@ -48,9 +48,11 @@ tooltip label {
 }
 
 button {
-   box-shadow: none;
+   /* Use box-shadow instead of border so the text isn't offset */
+   /*box-shadow: inset 0 -3px transparent;*/
    /* Avoid rounded borders under each button name */
-   border: none;
+   box-shadow: none;
+   border: 1px solid transparent;
    border-radius: 0;
 }
 
@@ -58,20 +60,23 @@ button {
 button:hover {
    background: inherit;
    text-shadow: none;
-   /* Use box-shadow instead of border so the text isn't offset */
-   box-shadow: inset 0 -2px @fg-color;
+   /*box-shadow: inset 0 -3px @fg-color;*/
+   border:1px solid @fg-color;
 }
 
 #tags button {
    padding-top: 0;
    padding-bottom: 0;
-   padding-left: 10px;
-   padding-right: 10px;
-   color: @fg-color-disabled;
-   /*margin: 3px 2px 3px 2px;*/
+   padding-left: 8px;
+   padding-right: 8px;
+   color: @bg-color;
+   margin: 3px 2px 3px 2px;
+   background: @bg-color-alt; 
+   border-radius: 5px;
 }
 
 #tags button.occupied {
+   /*background-color: #535354;*/
    color: @fg-color;
 }
 
@@ -79,7 +84,8 @@ button:hover {
    /*background-color: #fff354;*/
    /*border-bottom: 3px solid #033250;*/
    color: @fg-color;
-   box-shadow: inset 0 -2px @hl-color;
+   border: 1px solid @hl-color;
+   /*box-shadow: inset 0 -3px @hl-color;*/
    /*color: @hl-color;*/
 }
 
