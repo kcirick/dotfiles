@@ -1,0 +1,53 @@
+# vim:ft=conf
+
+# file types
+ln  #link
+di  #directory
+fi  #file
+#ex  #executable
+ex ! #executable
+
+# text formats
+*.txt 
+*.c 
+*.h 
+*.sh 
+
+# documents
+*.pdf 
+
+# image formats
+*.bmp 
+*.gif 
+*.ico 
+*.jpg 
+*.jpeg 
+*.png 
+*.svg 
+*.webp 
+
+# audio formats
+*.aac 
+*.flac 
+*.midi 
+*.mp3 
+*.m4a 
+*.ogg 
+*.wav 
+
+# video formats
+*.mp4 
+*.avi 
+*.mpg 
+*.mpeg 
+*.flv 
+*.wmv 
+*.webm 
+
+# compressed files
+*.zip 
+*.tar 
+*.gz 
+*.bz2 
+*.lzma 
+*.xz 

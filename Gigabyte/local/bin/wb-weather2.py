@@ -22,6 +22,7 @@ weather_icons = {
     "Mostly Sunny": "\uf185",       "Mostly Clear Night": "\uf186",
     "Partly Cloudy": "\uf6c4",      "Partly Cloudy Night": "\uf6c3",
     "Mostly Cloudy": "\uf6c4",      "Mostly Cloudy Night": "\uf6c3",
+    "Foggy": "\uf75f",
     "Cloudy": "\uf0c2",
     "Wind": "\uf72e",
     "Scattered Showers": "\uf743",  "Scattered Showers Night": "\uf73c",

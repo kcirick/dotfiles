@@ -1,0 +1,17 @@
+# UI options
+set drawbox
+set mouse
+set icons
+
+# mappings
+map <delete> delete
+
+# remove preview cursor
+set cursorpreviewfmt ""
+
+cmd open ${{
+   case $(file --mime-type -Lb $f) in
+      text/*) foot -e vi $fx;;
+      *) for f in $fx; do xdg-open $f > /dev/null 2>&1 & done;;
+   esac
+}}
