@@ -1,0 +1,16 @@
+{
+   "layer": "top",
+   "height": 32,
+   "spacing": 0,
+
+   "_Modules_": "Choose the order of the modules",
+   "modules-left": ["custom/logo", "group/r-logo", 
+                    "group/l-tags", "dwl/tags", "group/r-tags"],
+
+   "modules-center": ["clock"],
+
+   "modules-right": ["cpu", "memory", "pulseaudio", "network", "bluetooth", "battery", "idle_inhibitor", "group/r-system",
+                     "group/l-tray", "tray", "group/power-menu"], 
+
+   "include": "~/.config/waybar/modules.json"
+}

@@ -1,0 +1,91 @@
+# Sample SimpleWC Config
+
+n_tags = 5
+
+border_width = 1
+tile_gap_width = 10
+sloppy_focus = true 
+moveresize_step = 15
+touchpad_tap_click = true
+
+background_colour = #222222
+
+border_colour_focus = #4D9BC1
+border_colour_unfocus = #333333 
+border_colour_urgent = #FF0000 
+border_colour_fixed = #0000FF
+border_colour_outline = #FFFFFF
+
+#--- Command for locking -----
+lock_cmd = hyprlock 
+
+#--- Autostart script  -----
+autostart = ~/.config/simplewc/autostart.sh 
+
+#--- XKB settings -----
+#xkb_layout = us
+xkb_options = compose:ralt
+
+#--- Key Bindings -----
+KEY = S+A+q QUIT 0
+KEY = S+A+l LOCK lock_cmd 
+KEY = XF86AudioLowerVolume SPAWN pactl set-sink-volume @DEFAULT_SINK@ -5%
+KEY = XF86AudioRaiseVolume SPAWN pactl set-sink-volume @DEFAULT_SINK@ +5%
+KEY = XF86AudioMute SPAWN pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+KEY = XF86MonBrightnessUp SPAWN brightnessctl -d intel_backlight set 10%+
+KEY = XF86MonBrightnessDown SPAWN brightnessctl -d intel_backlight set 10%-
+
+KEY = A+S+m SPAWN simplewc-msg --set --output off
+KEY = A+S+n SPAWN simplewc-msg --set --output on
+
+#--- Spawns
+KEY = S+A+Return SPAWN foot
+KEY = S+A+r SPAWN fuzzel
+KEY = S+A+w SPAWN firefox
+
+#--- Client actions
+KEY = A+Tab CLIENT cycle
+KEY = A+f CLIENT toggle_fixed
+KEY = A+k CLIENT kill
+KEY = A+m CLIENT maximize
+KEY = A+i CLIENT toggle_visible
+
+#--- Tags
+KEY = A+1 TAG select
+KEY = A+2 TAG select
+KEY = A+3 TAG select
+KEY = A+4 TAG select
+KEY = A+5 TAG select
+KEY = A+C+1 TAG toggle
+KEY = A+C+2 TAG toggle
+KEY = A+C+3 TAG toggle
+KEY = A+C+4 TAG toggle
+KEY = A+C+5 TAG toggle
+KEY = A+S+1 CLIENT send_to_tag
+KEY = A+S+2 CLIENT send_to_tag
+KEY = A+S+3 CLIENT send_to_tag
+KEY = A+S+4 CLIENT send_to_tag
+KEY = A+S+5 CLIENT send_to_tag
+
+#--- Move/Resize
+KEY = A+Left CLIENT move
+KEY = A+Right CLIENT move
+KEY = A+Up CLIENT move
+KEY = A+Down CLIENT move
+KEY = A+S+Left CLIENT resize
+KEY = A+S+Right CLIENT resize
+KEY = A+S+Up CLIENT resize
+KEY = A+S+Down CLIENT resize
+
+#--- Tiling (auto-tile)
+KEY = A+t TAG tile
+
+#--- Manual tiling
+KEY = A+bracketleft CLIENT tile_left
+KEY = A+bracketright CLIENT tile_right
+
+#--- Mouse Bindings -----
+MOUSE = A+Button_Left CLIENT move
+MOUSE = A+Button_Right CLIENT resize
+MOUSE = Button_Left ROOT test
