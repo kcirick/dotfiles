@@ -1,0 +1,18 @@
+# UI options
+set drawbox
+set mouse
+set icons
+
+# mappings
+map <delete> delete
+map O $mimeopen --ask $f
+
+# remove preview cursor
+set cursorpreviewfmt ""
+
+cmd open &{{
+   case $(file --mime-type -Lb $f) in 
+      text/*) foot -e nvim $fx;;
+      *) for f in $fx; do xdg-open $f > dev/null 2>&1 & done;;
+   esac
+}}

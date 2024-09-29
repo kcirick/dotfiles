@@ -12,6 +12,10 @@ This is the dotfiles for my mini-PC (Gigabyte BXi3-5010).
 
 This is the dotfiles for my ASUS C424 Chromebook. (coming soon)
 
+## Swift3
+
+This is the dotfiles for my Acer Swift3 laptop (SF314-43-R36M)
+
 ## Historical
 
 This contains dotfiles that I have created in the past but no longer use and/or are outdated.

@@ -1,0 +1,15 @@
+default-timeout=5000
+
+background-color=#111111EE
+border-size=1
+border-color=#3A3A3AFF
+border-radius=5
+
+[urgency=low]
+border-color=#AAAAAAFF
+
+[urgency=normal]
+border-color=#3A3A3AFF
+
+[urgency=high]
+border-color=#EE4444FF

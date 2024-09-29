@@ -1,0 +1,99 @@
+{
+   "custom/logo": {
+      "format": " \uf798 ",
+      "interval": "once",
+      "tooltip": false
+   },
+   "river/tags": {
+      "num-tags": 5, 
+      "tag-labels": [ " 1 " , " 2 ", " 3 ", " 4 ", " 5 " ]
+   },
+
+   "clock": {
+      "interval": 60,
+      "format": " {:%a %b %d %H:%M} ",
+      "tooltip-format": "<tt><big>{calendar}</big></tt>",
+      "calendar": {
+         "mode": "month",
+         "format": {
+            "months":   "<span color='#ffead3'>{}</span>",
+            "days":     "<span color='#eeeeee'>{}</span>",
+            "weeks":    "<span color='#99ffdd'><b>W{}</b></span>",
+            "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+            "today":    "<span color='#ff6699'><b>{}</b></span>"
+         }
+      }
+   },
+
+   "cpu": {
+      "interval": 5,
+      "format": "\uf2db {usage}%",
+      "tooltip": true,
+      "_on_click": "exec foot -e sh -c 'top'"
+   },
+   "memory": {
+      "format": "\uf538 {}%"
+   },
+   "pulseaudio": {
+      "scroll-steps": 5,
+      "format": "{icon} {volume}%",
+      "format-muted": "\uf6a9 -muted-",
+      "format-bluetooth": "{icon} {volume}% (\uf294)",
+      "format-icons": {
+         "headphones": "\uf025",
+         "phone": "\uf095",
+         "default": [ "\uf026", "\uf027", "\uf028" ]
+      },
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+   },
+   "network": {
+      "format-wifi": "\uf1eb {essid}",
+      "format-disconnected": "-no-network-",
+      "tooltip-format-wifi": "{ifname} - ({signalStrength}%)\nIP - {ipaddr}"
+   },
+   "bluetooth": {
+      "format": "\uf294 {status}"
+   },
+   "battery": {
+      "interval": 30,
+      "states": {
+         "warning": 30,
+         "critical": 15
+      },
+      "format": "{icon} {capacity}%",
+      "format-icons": [ "\uf244", "\uf243", "\uf242", "\uf241", "\uf240" ],
+      "format-charging": "\ue55b {capacity}%",
+      "format-full": "\uf1e6 {capacity}%",
+      "tooltip-format": "{timeTo}"
+   },
+   "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+         "activated": " \uf06e ",
+         "deactivated": " \uf070 "
+      }
+   },
+   "group/power-menu": {
+      "orientation": "horizontal",
+      "drawer": {
+         "children-class": "not-logo",
+         "transition-left-to-right": false
+      },
+      "modules": [ "custom/power", "custom/logout", "custom/lock" ]
+   },
+   "custom/power": {
+      "format": " \uf011 ",
+      "tooltip": false
+   },
+   "custom/logout": {
+      "format": " \uf08b ",
+      "tooltip": false,
+      "on-click": "riverctl exit"
+      
+   },
+   "custom/lock": {
+      "format": " \uf023 ",
+      "tooltip": false,
+      "on-click": "riverctl spawn hyprlock"
+   }
+}
