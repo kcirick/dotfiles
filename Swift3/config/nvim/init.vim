@@ -1,6 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 "Plugin section
 Plug 'itchyny/lightline.vim'
+Plug 'nvimdev/indentmini.nvim'
 call plug#end()
 
 set nocompatible
@@ -20,3 +21,4 @@ let g:lightline = {
 	\ 'colorscheme': 'wombat',
 	\ }
 
+lua require('plugins')
