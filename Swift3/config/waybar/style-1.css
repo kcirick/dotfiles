@@ -57,6 +57,7 @@ tooltip {
    padding-left: 10px;
    padding-right: 10px;
    color: @fg-color;
+   font-size: 16px;
 }
 
 #tags button {
