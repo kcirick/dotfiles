@@ -16,7 +16,7 @@ rst="\e[0m"
 #set="│┌ ┐┘─┐  └│┘└ ┌─ ├"
 
 color-echo() {  # print with colors
-      printf "\e[22C%s$cyn%-12s  $rst%s\n" "$1" "$2" "$3"
+      printf "\e[23C%s$cyn%-12s  $rst%s\n" "$1" "$2" "$3"
 }
 
 print-kernel() {
@@ -30,7 +30,7 @@ print-uptime() {
    hours=$((${up}/3600%24))    # seconds divided by 3600 mod 24 is hours
    mins=$((${up}/60%60))       # seconds divided by 60 mod 60 is mins
    
-   color-echo "Uptime" "$(echo $days'd '$hours'h '$mins'm')"
+   color-echo "├ " "Uptime" "$(echo $days'd '$hours'h '$mins'm')"
 }
 
 print-shell() {
@@ -100,7 +100,7 @@ print-distro() {
 print-packages() {
    #color-echo "└ " "Packages" "$(dpkg -l | grep -c '^ii') (dpkg)"
    #color-echo "└ " "Packages" "$(sqlite3 /var/cache/dnf/packages.db 'SELECT count(pkg) FROM installed') (dnf) / $(flatpak list | wc -l) (flatpak)"
-   color-echo "└ " "Packages" "$(sqlite3 /var/log/packages/pfs_packages.db 'SELECT count(package_name) FROM installed') (pfstool)"
+   color-echo "└ " "Packages" "$(sqlite3 /var/log/packages/pfs_packages.db 'SELECT count(package_name) FROM installed') (pfstool) / $(flatpak list | wc -l) (flatpak)"
 }
 
 print-resolution() {
@@ -142,7 +142,7 @@ print-image() {
       printf '\e[%sA\e[9999999D' "-11"
    elif [ $TERM = "foot" ]; then
       echo -n "  " && img2sixel -w 140 $1
-      printf '\e[%sA\e[9999999D' "${lines:-11}"
+      printf '\e[%sA\e[9999999D' "${lines:-13}"
    fi
 }
 
@@ -155,6 +155,7 @@ printf "\e[21C%s\n" "System:"
 print-distro
 print-kernel
 print-cpu
+print-uptime
 print-mem
 print-packages
 

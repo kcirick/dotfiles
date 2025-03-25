@@ -2,7 +2,7 @@
 
 n_tags = 5
 
-border_width = 1
+border_width = 2
 tile_gap_width = 10
 sloppy_focus = true 
 moveresize_step = 15
@@ -42,7 +42,7 @@ KEY = A+S+n SPAWN simplewc-msg --set --output on
 #--- Spawns
 KEY = S+A+Return SPAWN foot
 KEY = S+A+r SPAWN fuzzel
-KEY = S+A+w SPAWN firefox
+KEY = S+A+w SPAWN org.mozilla.firefox
 
 #--- Client actions
 KEY = A+Tab CLIENT cycle

@@ -4,6 +4,11 @@
       "interval": "once",
       "tooltip": false
    },
+   "custom/separator": {
+      "format": "::",
+      "interval": "once",
+      "tooltip": false
+   },
    "dwl/tags": {
       "num-tags": 5, 
       "tag-labels": [ " 1 " , " 2 ", " 3 ", " 4 ", " 5 " ]
@@ -23,6 +28,13 @@
             "today":    "<span color='#ff6699'><b>{}</b></span>"
          }
       }
+   },
+   "custom/weather": {
+      "exec": "~/.local/bin/wb-weather3.py",
+      "return-type": "json",
+      "format": " {}",
+      "tooltip": true,
+      "interval": 900
    },
 
    "cpu": {

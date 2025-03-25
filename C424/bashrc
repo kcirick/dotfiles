@@ -1,6 +1,11 @@
-if [ -f "/etc/bashrc" ]; then
-   source /etc/bashrc
+if [ -f /etc/bashrc ]; then
+	source /etc/bashrc
 fi
 
-PS1=$' \uf07b \[\e[32m\]\\w\[\e[0m\] \uf061 '
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin:$PATH"
+fi
 
+PS1=$'  \uf07b  \[\e[32m\]\\w\[\e[0m\] \uf061 '
+
+alias vim='nvim'

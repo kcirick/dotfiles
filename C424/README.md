@@ -3,7 +3,7 @@
 
 This is for ASUS C424 Chromebook 
 
- - OS: LFS 
+ - OS: LFS 12.3-systemd 
  - WM: SimpleWC
  - Bar: Waybar
  - Resolution: 1920x1080
