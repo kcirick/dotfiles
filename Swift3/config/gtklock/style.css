@@ -1,0 +1,39 @@
+window {
+   background-color: #222222;
+}
+
+#window-box {
+   padding: 20px;
+   background-color: #BBBBBB;
+   border: 2px solid black;
+   border-radius: 10px;
+}
+
+#clock-label {
+   font-size: 20pt;
+}
+
+#date-label {
+   font-size: 18pt;
+}
+
+#input-field {
+   border: 1px solid gray;
+}
+
+#input-field:focused {
+   box-shadow: none;
+   border: 1px solid black;
+}
+
+#unlock-button {
+   color: black;
+   text-shadow: none;
+   background-image: none;
+   background-color: #BBBBBB;
+   border: 1px solidgray;
+}
+
+#unlock-button:focused {
+   border: 1px solid black;
+}

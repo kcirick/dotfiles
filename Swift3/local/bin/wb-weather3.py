@@ -1,14 +1,28 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from urllib.request import urlopen
 from datetime import datetime
 import pandas as pd
 import numpy as np
 import json
+import subprocess
 
 # --- Put in the information below ---
 latitude = 45.4112
 longitude = -75.6981
 # ------------------------------------
+
+try:
+    ping_output = subprocess.check_output(["ping", "-c" "1", "8.8.8.8"])
+except subprocess.CalledProcessError:
+    #print("Network is down")
+    out_data = {
+        "text": f" \uf071 --°c ",
+        "tooltip": "network is down",
+    }
+
+    print(json.dumps(out_data))
+    exit()
+    
 
 url = "https://api.open-meteo.com/v1/forecast?"
 url += "latitude=" + str(latitude) + "&longitude=" + str(longitude)
@@ -20,7 +34,7 @@ url += "&forecast_hours=12"
 #print(url)
 
 wmo_data = {
-     #   description        night icon  day icon   
+     #   description        night icon  day icon
      0: ['Clear sky',       u'\uf186',  u'\uf185'],
      1: ['Mainly clear',    u'\uf6c3',  u'\uf6c4'],
      2: ['Partly cloudy',   u'\uf6c3',  u'\uf6c4'],
@@ -58,9 +72,9 @@ except:
     print("ERROR")
 
 cur_time = datetime.strptime(data_json['current']['time'], '%Y-%m-%dT%H:%M')
-sunrise = datetime.strptime(data_json['daily']['sunrise'][0],'%Y-%m-%dT%H:%M') 
+sunrise = datetime.strptime(data_json['daily']['sunrise'][0],'%Y-%m-%dT%H:%M')
 sunset = datetime.strptime(data_json['daily']['sunset'][0],'%Y-%m-%dT%H:%M')
-cur_is_dt = 1 if (cur_time>sunrise) & (cur_time<sunset) else 0 
+cur_is_dt = 1 if (cur_time>sunrise) & (cur_time<sunset) else 0
 
 
 # Current values
@@ -71,23 +85,23 @@ cur_humidity = round(data_json['current']['relative_humidity_2m'])
 cur_wind = round(data_json['current']['wind_speed_10m'])
 
 # Hourly forecast
-hourly_date = ['']*3
-hourly_wc = [0]*3
-hourly_temp = [0]*3
-hourly_precipitation = [0]*3
-hourly_is_dt = [0]*3
+hourly_date = ['']*4
+hourly_wc = [0]*4
+hourly_temp = [0]*4
+hourly_precipitation = [0]*4
+hourly_is_dt = [0]*4
 k=0
 
 for i in range(12):
     this_time = datetime.strptime(data_json['hourly']['time'][i], '%Y-%m-%dT%H:%M')
-    if (this_time>cur_time) & (k<3):
+    if (this_time>cur_time) & (k<4):
         hourly_date[k] = this_time.strftime("%H:%M")
         hourly_wc[k] = data_json['hourly']['weather_code'][i]
         hourly_temp[k] = round(data_json['hourly']['temperature_2m'][i])
         hourly_precipitation[k] = round(data_json['hourly']['precipitation_probability'][i])
         hourly_is_dt[k] = 1 if (this_time>sunrise) & (this_time<sunset) else 0
         k = k+1
-    
+
 # Daily forecast
 daily_date = ['']*7
 daily_wc = [0]*7
@@ -119,19 +133,20 @@ for i in range(7):
 #    f'{daily_date[4]}\t{wmo_data[daily_wc[4]][2]}\t{daily_temp_min[4]} / {daily_temp_max[4]}\t{daily_precipitation[4]}%',
 #)
 tooltip_text = str.format(
-    "{}\n{}\n\n{}\n{}\n{}\n\n{}\n{}\n\n{}\n{}\n{}\n{}\n{}",
-    f'<span size="xx-large">{wmo_data[cur_wc][cur_is_dt+1]}</span>  <big>{wmo_data[cur_wc][0]}</big>',
-    f'<big>{cur_temp}°c (feels like {cur_apparent_temp}°c)</big>',
+    "{}\n{}\n\n{}\n{}\n{}\n\n{}\n{}\n\n{}\n{}\n{}\n{}\n{}\n{}",
+    f'<span size="xx-large">{wmo_data[cur_wc][cur_is_dt+1]}</span>   <span size="x-large">{wmo_data[cur_wc][0]}</span>',
+    f'<span size="large">{cur_temp}°c (feels like {cur_apparent_temp}°c)</span>',
     f'\uf2ca {daily_temp_min[0]}°c / {daily_temp_max[0]}°c',
     f'\uf185 {sunrise.strftime("%H:%M")} / {sunset.strftime("%H:%M")}',
     f'\uf72e {cur_wind}km/h / \uf773 {cur_humidity}%',
-    f'{hourly_date[0]}\t{hourly_date[1]}\t{hourly_date[2]}',
-    f'{wmo_data[hourly_wc[0]][hourly_is_dt[0]+1]} {hourly_temp[0]}°c\t{wmo_data[hourly_wc[1]][hourly_is_dt[1]+1]} {hourly_temp[1]}°c\t{wmo_data[hourly_wc[2]][hourly_is_dt[2]+1]} {hourly_temp[2]}°c\t',
+    f'{hourly_date[0]}\t{hourly_date[1]}\t{hourly_date[2]}\t{hourly_date[3]}',
+    f'{wmo_data[hourly_wc[0]][hourly_is_dt[0]+1]} {hourly_temp[0]}°c\t{wmo_data[hourly_wc[1]][hourly_is_dt[1]+1]} {hourly_temp[1]}°c\t{wmo_data[hourly_wc[2]][hourly_is_dt[2]+1]} {hourly_temp[2]}°c\t{wmo_data[hourly_wc[3]][hourly_is_dt[3]+1]} {hourly_temp[3]}°c\t',
     f'\t\t\uf2ca\t\uf0e9',
     f'{daily_date[1]}\t{wmo_data[daily_wc[1]][2]}\t{daily_temp_min[1]} / {daily_temp_max[1]}\t{daily_precipitation[1]}%',
     f'{daily_date[2]}\t{wmo_data[daily_wc[2]][2]}\t{daily_temp_min[2]} / {daily_temp_max[2]}\t{daily_precipitation[2]}%',
     f'{daily_date[3]}\t{wmo_data[daily_wc[3]][2]}\t{daily_temp_min[3]} / {daily_temp_max[3]}\t{daily_precipitation[3]}%',
     f'{daily_date[4]}\t{wmo_data[daily_wc[4]][2]}\t{daily_temp_min[4]} / {daily_temp_max[4]}\t{daily_precipitation[4]}%',
+    f'{daily_date[5]}\t{wmo_data[daily_wc[5]][2]}\t{daily_temp_min[5]} / {daily_temp_max[5]}\t{daily_precipitation[5]}%',
 )
 
 out_data = {

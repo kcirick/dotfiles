@@ -1,15 +1,28 @@
-{
+[{
    "layer": "top",
    "height": 32,
    "spacing": 0,
+   "output": "eDP-1",
 
    "_Modules_": "Choose the order of the modules",
-   "modules-left": ["custom/logo", "group/r-logo", "river/tags", "group/r-tags"],
+   "modules-left": ["custom/logo", "group/r-logo", "dwl/tags", "group/r-tags"],
 
-   "modules-center": ["clock", "custom/separator", "custom/weather2"],
+   "modules-center": ["clock", "custom/separator", "custom/weather"],
 
-   "modules-right": ["cpu", "memory", "pulseaudio", "network", "bluetooth", "battery", "idle_inhibitor", "group/r-system",
+   "modules-right": ["cpu", "memory", "pulseaudio", "network", "bluetooth", "battery", "custom/pkg-updates", "group/r-system",
                      "group/l-tray", "tray", "group/power-menu"], 
 
    "include": "~/.config/waybar/modules.json"
-}
+}, {
+   "layer": "top",
+   "height": 32,
+   "spacing": 0,
+   "output": ["DP-1", "HDMI-A-1"],
+
+   "_Modules_": "Choose the order of the modules",
+   "modules-left": ["custom/logo", "group/r-logo", "dwl/tags", "group/r-tags"],
+
+   "modules-center": ["clock"],
+
+   "include": "~/.config/waybar/modules.json"
+}]

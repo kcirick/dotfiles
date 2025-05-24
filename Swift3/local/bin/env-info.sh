@@ -2,7 +2,7 @@
 
 # simple screen information script
 
-wms=(berry dwm openbox twobwm pekwm simplewm labwc simplewc river)
+wms=(berry dwm openbox twobwm pekwm simplewm labwc simplewc)
 bars=(waybar polybar)
 
 # define colors for color-echo
@@ -16,7 +16,7 @@ rst="\e[0m"
 #set="│┌ ┐┘─┐  └│┘└ ┌─ ├"
 
 color-echo() {  # print with colors
-      printf "\e[22C%s$cyn%-12s  $rst%s\n" "$1" "$2" "$3"
+      printf "\e[26C%s$cyn%-12s  $rst%s\n" "$1" "$2" "$3"
 }
 
 print-kernel() {
@@ -29,8 +29,8 @@ print-uptime() {
    days=$((${up}/86400))       # seconds divided by 86400 is days
    hours=$((${up}/3600%24))    # seconds divided by 3600 mod 24 is hours
    mins=$((${up}/60%60))       # seconds divided by 60 mod 60 is mins
-   
-   color-echo "Uptime" "$(echo $days'd '$hours'h '$mins'm')"
+
+   color-echo "├ " "Uptime" "$(echo $days'd '$hours'h '$mins'm')"
 }
 
 print-shell() {
@@ -50,7 +50,7 @@ print-cpu() {
 print-disk() {
    # field 2 on line 2 is total, field 3 on line 2 is used
    disk=$(df -h / | awk 'NR==2 {total=$2; used=$3; print used" / "total}')
-   
+
    color-echo "Disk" "$disk"
 }
 
@@ -99,22 +99,20 @@ print-distro() {
 
 print-packages() {
    #color-echo "└ " "Packages" "$(dpkg -l | grep -c '^ii') (dpkg)"
-   color-echo "└ " "Packages" "$(sqlite3 /var/cache/dnf/packages.db 'SELECT count(pkg) FROM installed') (dnf) / $(flatpak list | wc -l) (flatpak)" 
-   #color-echo "└ " "Packages" "$(sqlite3 /var/log/packages/pfs_packages.db 'SELECT count(package_name) FROM installed') (pfstool)"
+   #color-echo "└ " "Packages" "$(sqlite3 /var/cache/dnf/packages.db 'SELECT count(pkg) FROM installed') (dnf) / $(flatpak list | wc -l) (flatpak)"
+   #color-echo "└ " "Packages" "$(sqlite3 /var/log/packages/pfs_packages.db 'SELECT count(package_name) FROM installed') (pfstool) / $(flatpak list | wc -l) (flatpak)"
+   #color-echo "└ " "Packages" "$(rpm -qa | wc -l) (zypper) / $(flatpak list | wc -l) (flatpak)"
+   color-echo "└ " "Packages" "$(ls -d /var/db/pkg/*/* | wc -l) (emerge) / $(flatpak list | wc -l) (flatpak)"
 }
 
 print-resolution() {
-   if [[ $DISPLAY ]]; then
+   #if [[ $DISPLAY ]]; then
+   #   res=$(xwininfo -root | grep 'geometry' | awk '{print $2}' | cut -d+ -f1)
+   #else
       res=$(wlr-randr | grep 'current' | awk '{print $1}')
-   else
-      for dev in /sys/class/drm/*/modes; do
-         read -r single_res _ < "$dev"
+   #fi
 
-         [[ $single_res ]] && res="${single_res}"
-      done
-   fi
-
-   color-echo "├ " "Resolution" $res
+   color-echo "├ " "Resolution" "$(echo ${res[@]})"
 }
 
 print-colors() {
@@ -136,13 +134,24 @@ print-image() {
       printf "$red%10s$rst\n" '       |/ )\|    '
       printf "$red%10s$rst\n" '         /       '
       printf "$red%10s$rst\n" '                 '
+      #printf "$grn%10s$rst\n" '                   '
+      #printf "$grn%10s$rst\n" '      jmmMMMmg_    '
+      #printf "$grn%10s$rst\n" '    jP~       ~@_  '
+      #printf "$grn%10s$rst\n" '   #F  jm@MMy   NL '
+      #printf "$grn%10s$rst\n" '  jF  jF     @   M '
+      #printf "$grn%10s$rst\n" '  jL  ]k     M   M '
+      #printf "$grn%10s$rst\n" '   Mg   ~"  dF  jF '
+      #printf "$grn%10s$rst\n" '    MMmmym#P  jmF  '
+      #printf "$grn%10s$rst\n" '      ~Mmmmmm@~    '
+      #printf "$grn%10s$rst\n" '                   '
+
       printf '\e[%sA\e[9999999D' "${lines:-9}"
    elif [ $TERM = "xterm-kitty" ]; then
       kitty +kitten icat --align left --place 20x20@0x3 $1
       printf '\e[%sA\e[9999999D' "-11"
    elif [ $TERM = "foot" ]; then
       echo -n "  " && img2sixel -w 140 $1
-      printf '\e[%sA\e[9999999D' "${lines:-13}"
+      printf '\e[%sA\e[9999999D' "${lines:-10}"
    fi
 }
 
@@ -151,14 +160,15 @@ echo -e "$prp$USER@$HOSTNAME$rst\n\n"
 
 print-image $1
 
-printf "\e[21C%s\n" "System:"
+printf "\e[24C%s\n" "System:"
 print-distro
 print-kernel
 print-cpu
+print-uptime
 print-mem
 print-packages
 
-printf "\e[21C%s\n" "Session:"
+printf "\e[24C%s\n" "Session:"
 print-wm
 print-bar
 print-resolution

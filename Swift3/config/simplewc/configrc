@@ -1,0 +1,99 @@
+#--------------------------------
+#--- Sample SimpleWC Config -----
+#--------------------------------
+
+#--- Number of tags -----
+n_tags = 5
+
+border_width = 2
+tile_gap_width = 10
+moveresize_step = 10
+
+#--- Colour definitions -----
+background_colour = #222222
+
+#border_colour_focus = #1793D0
+border_colour_focus = #8A8C49
+border_colour_unfocus = #333333 
+border_colour_urgent = #FF0000 
+border_colour_fixed = #7573B6
+border_colour_outline = #FFFFFF
+
+#--- Focus style -----
+# 0 - none / 1 - sloppy / 2 - raise
+focus_type = 1
+
+#--- Autostart script  -----
+autostart = ~/.config/simplewc/autostart.sh 
+
+#--- XKB settings -----
+#xkb_layout = us
+#xkb_options = compose:ralt
+
+#--- Placement of new client -----
+# 0 - under mouse / 1 - cenetered / 2 - hybrid
+#new_client_placement = 2
+
+#--- Touchpad settings -----
+touchpad_tap_click = true
+
+#--- Key Bindings -----
+KEY = S+A+q QUIT 0
+
+#--- Spawns
+KEY = S+A+Return SPAWN foot
+KEY = S+A+r SPAWN fuzzel
+
+KEY = XF86AudioLowerVolume SPAWN volume_brightness.sh volume down
+KEY = XF86AudioRaiseVolume SPAWN volume_brightness.sh volume up
+KEY = XF86AudioMute SPAWN volume_brightness.sh volume mute
+
+KEY = XF86MonBrightnessUp SPAWN volume_brightness.sh brightness up
+KEY = XF86MonBrightnessDown SPAWN volume_brightness.sh brightness down
+
+#--- Client actions
+KEY = A+Tab CLIENT cycle
+KEY = W+k CLIENT kill
+KEY = W+m CLIENT toggle_maximize
+KEY = W+f CLIENT toggle_fixed
+KEY = W+v CLIENT toggle_visible
+KEY = W+w CLIENT toggle_fullscreen
+
+#--- Tags
+KEY = A+1 TAG select
+KEY = A+2 TAG select
+KEY = A+3 TAG select
+KEY = A+4 TAG select
+KEY = A+5 TAG select
+KEY = A+C+1 TAG toggle
+KEY = A+C+2 TAG toggle
+KEY = A+C+3 TAG toggle
+KEY = A+C+4 TAG toggle
+KEY = A+C+5 TAG toggle
+KEY = A+S+1 CLIENT send_to_tag
+KEY = A+S+2 CLIENT send_to_tag
+KEY = A+S+3 CLIENT send_to_tag
+KEY = A+S+4 CLIENT send_to_tag
+KEY = A+S+5 CLIENT send_to_tag
+
+#--- Move/Resize
+KEY = W+Left CLIENT move
+KEY = W+Right CLIENT move
+KEY = W+Up CLIENT move
+KEY = W+Down CLIENT move
+KEY = W+S+Left CLIENT resize
+KEY = W+S+Right CLIENT resize
+KEY = W+S+Up CLIENT resize
+KEY = W+S+Down CLIENT resize
+
+#--- Tiling (auto-tile)
+KEY = A+t TAG tile
+
+#--- Manual tiling
+KEY = W+S+Left CLIENT tile_left
+KEY = W+S+Right CLIENT tile_right
+
+#--- Mouse Bindings -----
+MOUSE = W+Button_Left CLIENT move
+MOUSE = W+Button_Right CLIENT resize
+#MOUSE = Button_Left ROOT test

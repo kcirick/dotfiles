@@ -1,0 +1,20 @@
+# tab sizes
+set tabsize 3
+set tabstospaces
+set autoindent
+
+# Supported colors are white, black, blue, green, red, cyan, yellow, magenta
+# First color is foreground; second color is background
+set numbercolor yellow black
+set keycolor red black
+
+# syntax highlighting
+include "/usr/share/nano/*.nanorc"
+
+# UI adjustments
+set constantshow
+set linenumbers
+set minibar
+
+# Multibuffer
+set multibuffer

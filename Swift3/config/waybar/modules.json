@@ -1,6 +1,6 @@
 {
    "custom/logo": {
-      "format": " \uf798 ",
+      "format": " \uf785 ",
       "interval": "once",
       "tooltip": false
    },
@@ -9,7 +9,7 @@
       "interval": "once",
       "tooltip": false
    },
-   "river/tags": {
+   "dwl/tags": {
       "num-tags": 5, 
       "tag-labels": [ " 1 " , " 2 ", " 3 ", " 4 ", " 5 " ]
    },
@@ -29,8 +29,8 @@
          }
       }
    },
-   "custom/weather2": {
-      "exec": "~/.local/bin/wb-weather2.py",
+   "custom/weather": {
+      "exec": "~/.local/bin/wb-weather3.py",
       "return-type": "json",
       "format": " {}",
       "tooltip": true,
@@ -41,7 +41,7 @@
       "interval": 5,
       "format": "\uf2db {usage}%",
       "tooltip": true,
-      "_on_click": "exec foot -e sh -c 'top'"
+      "on-click-right": "$TERM -e sh -c 'top'"
    },
    "memory": {
       "format": "\uf538 {}%"
@@ -49,22 +49,41 @@
    "pulseaudio": {
       "scroll-steps": 5,
       "format": "{icon} {volume}%",
-      "format-muted": "\uf6a9 -muted-",
+      "format-muted": "\uf6a9 --",
       "format-bluetooth": "{icon} {volume}% (\uf294)",
       "format-icons": {
-         "headphones": "\uf025",
+         "headphone": "\uf025",
          "phone": "\uf095",
          "default": [ "\uf026", "\uf027", "\uf028" ]
       },
-      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "$TERM -e pulsemixer"
+   },
+   "wireplumber": {
+      "scroll-steps": 5,
+      "format": "{icon} {volume}%",
+      "format-muted": "\uf6a9 --",
+      "format-bluetooth": "{icon} {volume}% (\uf294)",
+      "format-icons": {
+         "headphone": "\uf025",
+         "phone": "\uf095",
+         "default": [ "\uf026", "\uf027", "\uf028" ]
+      },
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "$TERM -e pulsemixer"
    },
    "network": {
       "format-wifi": "\uf1eb {essid}",
       "format-disconnected": "-no-network-",
-      "tooltip-format-wifi": "{ifname} - ({signalStrength}%)\nIP - {ipaddr}"
+      "tooltip-format-wifi": "{ifname} - ({signalStrength}%)\nIP - {ipaddr}",
+      "on-click-right": "$TERM -e impala"
    },
    "bluetooth": {
-      "format": "\uf294 {status}"
+      "format": "\uf294 {status}",
+      "format-connected": "\uf294 {num_connections}",
+      "tooltip-format-connected": "connections:\n{device_enumerate}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias} - {device_battery_percentage}%",
+      "on-click-right": "$TERM -e bluetui"
    },
    "battery": {
       "interval": 30,
@@ -85,13 +104,28 @@
          "deactivated": " \uf070 "
       }
    },
+   "custom/pkg-updates": {
+      "exec": "~/.local/bin/wb-pkg-updates.sh",
+      "on-click-right": "~/.local/bin/wb-pkg-updates.sh",
+      "interval": 3600,
+      "return-type": "json",
+      "format": "{icon} {0}",
+      "format-icons": {
+         "has-updates": "\uf2f1",
+         "updated": "\uf00c"
+      }
+   },
+   "tray": {
+      "spacing": 10
+   },
    "group/power-menu": {
       "orientation": "horizontal",
       "drawer": {
          "children-class": "not-logo",
-         "transition-left-to-right": false
+         "transition-left-to-right": false,
+         "click-to-reveal": true
       },
-      "modules": [ "custom/power", "custom/logout", "custom/lock" ]
+      "modules": [ "custom/power", "custom/logout", "custom/lock", "custom/suspend"]
    },
    "custom/power": {
       "format": " \uf011 ",
@@ -100,12 +134,16 @@
    "custom/logout": {
       "format": " \uf08b ",
       "tooltip": false,
-      "on-click": "riverctl exit"
-      
+      "on-click": "simplewc-msg --action quit"
+   },
+   "custom/suspend": {
+      "format": " \uf186 ",
+      "tooltip": false,
+      "on-click": "systemctl suspend"
    },
    "custom/lock": {
       "format": " \uf023 ",
       "tooltip": false,
-      "on-click": "riverctl spawn hyprlock"
+      "on-click": "sleep 1 && loginctl lock-session"
    }
 }
