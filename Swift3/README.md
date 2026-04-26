@@ -4,7 +4,7 @@
 This is for Acer Swift3 laptop (SF314-43-R36M) 
 
  - OS: Gentoo
- - WM: SimpleWC
+ - WM: Niri
  - Bar: Waybar
  - Resolution: 1920x1080
 

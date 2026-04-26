@@ -2,7 +2,7 @@
 
 # simple screen information script
 
-wms=(berry dwm openbox twobwm pekwm simplewm labwc simplewc)
+wms=(berry dwm openbox twobwm pekwm simplewm labwc simplewc niri)
 bars=(waybar polybar)
 
 # define colors for color-echo

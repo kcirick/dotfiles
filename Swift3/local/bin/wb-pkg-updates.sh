@@ -1,6 +1,6 @@
 #!/bin/bash
 
-update_emerge=$(emerge -puDN @world | grep '\[ebuild' | cut -d ']' -f 2 | awk '{print $1}')
+update_emerge=$(cat /var/log/emerge-updates.txt | grep '\[ebuild' | cut -d ']' -f 2 | awk '{print $1}')
 update_flatpak=$(flatpak remote-ls --updates | awk -F'\t' '{print $1}')
 
 count_emerge=0
