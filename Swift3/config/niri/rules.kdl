@@ -1,0 +1,33 @@
+window-rule {
+   geometry-corner-radius 8
+   clip-to-geometry true
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+   // This app-id regular expression will work for both:
+   // - host Firefox (app-id is "firefox")
+   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+   match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+   open-floating true
+}
+window-rule {
+   match app-id=r#"Firefox$"#
+   open-maximized true
+}
+window-rule {
+   match app-id=r#"org.xfce.ristretto"#
+   open-maximized-to-edges false
+   default-column-width { proportion 0.5; }
+}
+
+layer-rule {
+   match namespace=r#"^launcher$"#
+   opacity 0.8
+
+   background-effect {
+      xray false
+      blur true
+   }
+}
+

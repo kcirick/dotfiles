@@ -12,7 +12,8 @@ binds {
 
    //--- Spawns ----- 
    Alt+Shift+Return { spawn "foot"; }
-   Alt+Shift+R { spawn "fuzzel"; }
+   //Alt+Shift+R { spawn "fuzzel"; }
+   Alt+Shift+R { spawn-sh "qs ipc call launcher open"; }
    Alt+Shift+L { spawn "gtklock"; }
 
    //--- Multimedia keys -----
@@ -22,6 +23,8 @@ binds {
 
    XF86MonBrightnessUp    { spawn-sh "volume_brightness.sh brightness up"; }
    XF86MonBrightnessDown  { spawn-sh "volume_brightness.sh brightness down"; }
+
+   Mod+Print {screenshot-screen; }
 
    //--- Window navigations -----
    Mod+Left  { focus-column-left; }
